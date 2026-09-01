@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,16 +14,20 @@ public class Movement_Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance;
 
+    [Header("Animaciones")]
+    [SerializeField] private Animator animator;
+
     private Rigidbody rb;
     private PlayerMovement inputActions;
     private Vector2 moveInput;
-    private bool isRuning;
+    private bool isRunning;
     private bool isGrounded;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         inputActions = new PlayerMovement();
+        animator= GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -64,12 +69,12 @@ public class Movement_Player : MonoBehaviour
 
     private void OnRunPerformed(InputAction.CallbackContext context)
     {
-        isRuning = true;
+        isRunning = true;
     }
 
     private void OnRunCanceled(InputAction.CallbackContext context)
     {
-        isRuning = false;
+        isRunning = false;
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
@@ -77,26 +82,71 @@ public class Movement_Player : MonoBehaviour
         if (isGrounded == true)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animator.SetTrigger("Jump");
         }
     }
 
-
     void Update()
     {
+        
         if (groundCheck != null)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundlayer);
         }
 
-        float currentSpeed = speed * (isRuning ? runMultiplier : speed);
+        animator.SetBool("isGrounded", isGrounded);
 
-        Vector3 direction = new Vector3(moveInput.x, 0F, moveInput.y);
-        transform.Translate(direction * currentSpeed * Time.deltaTime, Space.World);
+        float targetAnimSpeed;
+
+        if (moveInput != Vector2.zero)
+        {
+            if(isRunning)
+            {
+                targetAnimSpeed = 2F;
+            }
+            else
+            {
+                targetAnimSpeed = 1F;
+            }
+
+        }
+        else
+        {
+            targetAnimSpeed = 0f;
+        }
+        animator.SetFloat("Speed", targetAnimSpeed, 0.1f, Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
-        
+        float currentMultiplier;
+        if(isRunning)
+        {
+            currentMultiplier = runMultiplier;
+        }
+        else
+        {
+            currentMultiplier = 1f;
+        }
+
+        float currentSpeed = speed * (isRunning ? runMultiplier : speed);
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        Vector3 direction = (cameraForward * moveInput.y + cameraRight * moveInput.x).normalized;
+
+        Vector3 targetVelocity = direction * currentSpeed;
+        rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+        Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
     }
 
     private void OnDrawGizmosSelected()
@@ -107,4 +157,5 @@ public class Movement_Player : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
         }
     }
+
 }
