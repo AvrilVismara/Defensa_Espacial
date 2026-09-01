@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 guid: 16114d403eabb53438de032c6f0d1deb
+<<<<<<< HEAD
 AssetOrigin:
   serializedVersion: 1
   productId: 196526
@@ -10,6 +11,10 @@ AssetOrigin:
   uploadId: 879174
 ModelImporter:
   serializedVersion: 24200
+=======
+ModelImporter:
+  serializedVersion: 20200
+>>>>>>> main
   internalIDToNameTable:
   - first:
       74: 6564411413370888346
@@ -25,8 +30,14 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+<<<<<<< HEAD
     removeConstantScaleCurves: 0
     motionNodeName: 
+=======
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+>>>>>>> main
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -65,7 +76,25 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
+<<<<<<< HEAD
       events: []
+=======
+      events:
+      - time: 0.3221903
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8077375
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+>>>>>>> main
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -78,12 +107,18 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+<<<<<<< HEAD
     importPhysicalCameras: 1
+=======
+>>>>>>> main
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+<<<<<<< HEAD
     nodeNameCollisionStrategy: 0
+=======
+>>>>>>> main
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -95,10 +130,13 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+<<<<<<< HEAD
     optimizeBones: 1
     generateMeshLods: 0
     meshLodGenerationFlags: 0
     maximumMeshLod: -1
+=======
+>>>>>>> main
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -109,7 +147,10 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+<<<<<<< HEAD
     strictVertexDataChecks: 0
+=======
+>>>>>>> main
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -920,15 +961,34 @@ ModelImporter:
     hasTranslationDoF: 1
     hasExtraRoot: 0
     skeletonHasParents: 1
+<<<<<<< HEAD
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+=======
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739,
+    type: 3}
+>>>>>>> main
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+<<<<<<< HEAD
   importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 1
+=======
+>>>>>>> main
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
+=======
+AssetOrigin:
+  serializedVersion: 1
+  productId: 196526
+  packageName: Starter Assets - ThirdPerson | Updates in new CharacterController
+    package
+  packageVersion: 1.1.7
+  assetPath: Assets/StarterAssets/ThirdPersonController/Character/Animations/Locomotion--Run_N.anim.fbx
+  uploadId: 879174
+>>>>>>> main
