@@ -2987,7 +2987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Jugador
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Controller
@@ -4097,17 +4097,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234675434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 031153c4b934f8d43808c941f846fa8d, type: 3}
+  m_Script: {fileID: 11500000, guid: eddd52f2c2525854ca8dd1362d4cd6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement_Player
-  speed: 1
-  runMultiplier: 2
-  jumpForce: 2
-  groundlayer:
+  velocidad: 0.5
+  multiplicadorVelocidad: 2.2
+  fuerzaDeSalto: 2
+  capaDelSuelo:
     serializedVersion: 2
     m_Bits: 1
-  groundCheck: {fileID: 483383387}
-  groundDistance: 0.1
+  CkeckCapaSuelo: {fileID: 483383387}
+  distanciaSuelo: 0.1
   animator: {fileID: 0}
 --- !u!136 &1234675438
 CapsuleCollider:
