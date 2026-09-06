@@ -141,6 +141,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "SaltoObst",
+            "id": "7f3556c4-17af-4b8f-a804-809e66a96689",
+            "actions": [
+                {
+                    "name": "JumpObs",
+                    "type": "Button",
+                    "id": "68cae9f2-f1c3-47e2-9432-909e142b7107",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e2ec9a5d-95f5-4d6a-af84-371f92b9d17f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpObs",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
