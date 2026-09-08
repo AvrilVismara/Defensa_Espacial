@@ -228,7 +228,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""name"": ""New action"",
                     ""type"": ""Value"",
                     ""id"": ""1e9f318f-d705-41ca-ba79-723d8a94f917"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

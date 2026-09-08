@@ -1,30 +1,52 @@
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
-public class ZoomDirecto : MonoBehaviour
+public class ZoomThirdPerson : MonoBehaviour
 {
-    [SerializeField] private float sensibilidad = 0.5f;
-    [SerializeField] private float minRadio = 3f;
-    [SerializeField] private float maxRadio = 15f;
+    [Header("Referencias")]
+    [SerializeField] private CinemachineCamera virtualCam;
 
-    private CinemachineOrbitalFollow orbital;
+    [Header("Ajustes de Distancia")]
+    [SerializeField] private float distanciaMinima = 1.5f; // Zoom cerca (puntería)
+    [SerializeField] private float distanciaMaxima = 4f;   // Zoom lejos (exploración)
+    [SerializeField] private float sensibilidad = 1f;
+    [SerializeField] private float suavizado = 10f;
+
+    private float distanciaObjetiva;
+    private CinemachineThirdPersonFollow thirdPersonFollow;
 
     private void Start()
     {
-        orbital = GetComponent<CinemachineOrbitalFollow>();
+        if (virtualCam == null)
+        {
+            virtualCam = GetComponent<CinemachineCamera>();
+        }
+
+        if (virtualCam != null)
+        {
+            thirdPersonFollow = virtualCam.GetComponent<CinemachineThirdPersonFollow>();
+            if (thirdPersonFollow != null)
+            {
+                distanciaObjetiva = thirdPersonFollow.CameraDistance;
+            }
+        }
     }
 
     private void Update()
     {
-        if (orbital == null || Mouse.current == null) return;
+        if (thirdPersonFollow == null || Mouse.current == null) return;
 
         float scroll = Mouse.current.scroll.y.ReadValue();
 
         if (Mathf.Abs(scroll) > 0.01f)
         {
-            float delta = (scroll / 120f) * sensibilidad;
-            orbital.Radius = Mathf.Clamp(orbital.Radius - delta, minRadio, maxRadio);
+            float direccion = Mathf.Sign(scroll);
+            distanciaObjetiva -= direccion * sensibilidad;
+            distanciaObjetiva = Mathf.Clamp(distanciaObjetiva, distanciaMinima, distanciaMaxima);
         }
+
+        //Movemos suavemente la distancia de la cámara en 3ª persona
+        thirdPersonFollow.CameraDistance = Mathf.Lerp(thirdPersonFollow.CameraDistance, distanciaObjetiva, Time.deltaTime * suavizado);
     }
 }
