@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f57e092d01f13d4e8281e16a9d2700e, type: 3}
+  m_Name: Ametralladora
+  m_EditorClassIdentifier: Assembly-CSharp::ConfigAmetralladoraSO
+  nombreArma: Ametralladora
+  municionMaxima: 100
+  cadencia: 0.1
+  danio: 7
+  automatica: 1
+  dispersion: 1.5
+  balasPorRafaga: 5
+  dispersionAdicional: 20
+  danioExtra: 0
+  tiempoEnfriamiento: 0.5
