@@ -4,9 +4,12 @@ using UnityEngine;
 public class NewMonoBehaviourScript : MonoBehaviour
 {
 
-    [SerializeField] private List<GameObject> meteorites = new List<GameObject>();
+    [SerializeField] private GameObject meteorite;  // El objeto a instanciar
+
     [SerializeField] float timer = 0;
     [SerializeField] float timeToSpawn;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,23 +20,27 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         timer += Time.deltaTime;
+
         if (timer > timeToSpawn)// para tener más de un spawner
         {
             SpawnMeteorite();
 
-            timer = 0;
+            timer = 0f;
 
         }
     }
     void SpawnMeteorite()
     {
-        if (meteorites.Count > 1)
-        {
-            int ramdon = Random.Range(0, meteorites.Count);// permite agregar meteoritos desde el inspector
+        Instantiate(meteorite, transform.position, transform.rotation);
 
-            Instantiate(meteorites[ramdon], transform.position, transform.rotation);
-        }
+        //  int random = Random.Range(0, meteorites.Count);// permite agregar meteoritos desde el inspector
+
+        //Instantiate(meteorites[random], transform.position, transform.rotation);
+
     }
 
 }
+
