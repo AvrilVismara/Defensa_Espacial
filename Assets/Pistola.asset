@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5448f2840827e0245bdb182f38e71954, type: 3}
+  m_Name: Pistola
+  m_EditorClassIdentifier: Assembly-CSharp::ConfigPistolaSO
+  nombreArma: Pistola
+  municionMaxima: 15
+  cadencia: 0.5
+  danio: 10
+  automatica: 0
+  dispersion: 0.3
