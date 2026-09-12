@@ -120,9 +120,18 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""5128923b-8b9a-4bea-a071-da51ba06f583"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
-                    ""id"": ""81b8662b-aa3c-4a9d-bf7c-5380c1c6b775"",
+                    ""id"": ""2ab4ad46-5115-4c47-9853-b82fc3ae43cb"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -209,7 +218,18 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e3fe43f3-c90d-4dad-9000-4a8fb58aaf38"",
+                    ""id"": ""2416a316-a2a3-4a0d-81e9-7411939631ba"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""226be1c3-de38-41d5-a769-f8a036adf5e0"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -228,7 +248,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""name"": ""New action"",
                     ""type"": ""Value"",
                     ""id"": ""1e9f318f-d705-41ca-ba79-723d8a94f917"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -247,6 +267,34 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""SaltoObst"",
+            ""id"": ""7f3556c4-17af-4b8f-a804-809e66a96689"",
+            ""actions"": [
+                {
+                    ""name"": ""JumpObs"",
+                    ""type"": ""Button"",
+                    ""id"": ""68cae9f2-f1c3-47e2-9432-909e142b7107"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e2ec9a5d-95f5-4d6a-af84-371f92b9d17f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpObs"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -256,16 +304,21 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         // Look
         m_Look = asset.FindActionMap("Look", throwIfNotFound: true);
         m_Look_Newaction = m_Look.FindAction("New action", throwIfNotFound: true);
+        // SaltoObst
+        m_SaltoObst = asset.FindActionMap("SaltoObst", throwIfNotFound: true);
+        m_SaltoObst_JumpObs = m_SaltoObst.FindAction("JumpObs", throwIfNotFound: true);
     }
 
     ~@PlayerMovement()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerMovement.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Look.enabled, "This will cause a leak and performance issues, PlayerMovement.Look.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_SaltoObst.enabled, "This will cause a leak and performance issues, PlayerMovement.SaltoObst.Disable() has not been called.");
     }
 
     /// <summary>
@@ -344,6 +397,7 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_Shoot;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
@@ -368,6 +422,10 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Jump".
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Zoom".
+        /// </summary>
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         /// <summary>
         /// Provides access to the underlying input action "Player/Shoot".
         /// </summary>
@@ -407,6 +465,9 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
@@ -430,6 +491,9 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
@@ -562,6 +626,102 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="LookActions" /> instance referencing this action map.
     /// </summary>
     public LookActions @Look => new LookActions(this);
+
+    // SaltoObst
+    private readonly InputActionMap m_SaltoObst;
+    private List<ISaltoObstActions> m_SaltoObstActionsCallbackInterfaces = new List<ISaltoObstActions>();
+    private readonly InputAction m_SaltoObst_JumpObs;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "SaltoObst".
+    /// </summary>
+    public struct SaltoObstActions
+    {
+        private @PlayerMovement m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public SaltoObstActions(@PlayerMovement wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "SaltoObst/JumpObs".
+        /// </summary>
+        public InputAction @JumpObs => m_Wrapper.m_SaltoObst_JumpObs;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_SaltoObst; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="SaltoObstActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(SaltoObstActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="SaltoObstActions" />
+        public void AddCallbacks(ISaltoObstActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Add(instance);
+            @JumpObs.started += instance.OnJumpObs;
+            @JumpObs.performed += instance.OnJumpObs;
+            @JumpObs.canceled += instance.OnJumpObs;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="SaltoObstActions" />
+        private void UnregisterCallbacks(ISaltoObstActions instance)
+        {
+            @JumpObs.started -= instance.OnJumpObs;
+            @JumpObs.performed -= instance.OnJumpObs;
+            @JumpObs.canceled -= instance.OnJumpObs;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />.
+        /// </summary>
+        /// <seealso cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />
+        public void RemoveCallbacks(ISaltoObstActions instance)
+        {
+            if (m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="SaltoObstActions.AddCallbacks(ISaltoObstActions)" />
+        /// <seealso cref="SaltoObstActions.RemoveCallbacks(ISaltoObstActions)" />
+        /// <seealso cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />
+        public void SetCallbacks(ISaltoObstActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SaltoObstActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="SaltoObstActions" /> instance referencing this action map.
+    /// </summary>
+    public SaltoObstActions @SaltoObst => new SaltoObstActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -591,6 +751,13 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoom(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Shoot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -612,5 +779,20 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnNewaction(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "SaltoObst" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="SaltoObstActions.AddCallbacks(ISaltoObstActions)" />
+    /// <seealso cref="SaltoObstActions.RemoveCallbacks(ISaltoObstActions)" />
+    public interface ISaltoObstActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "JumpObs" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJumpObs(InputAction.CallbackContext context);
     }
 }

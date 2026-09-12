@@ -34,9 +34,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "5128923b-8b9a-4bea-a071-da51ba06f583",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Shoot",
                     "type": "Button",
-                    "id": "81b8662b-aa3c-4a9d-bf7c-5380c1c6b775",
+                    "id": "2ab4ad46-5115-4c47-9853-b82fc3ae43cb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -123,7 +132,18 @@
                 },
                 {
                     "name": "",
-                    "id": "e3fe43f3-c90d-4dad-9000-4a8fb58aaf38",
+                    "id": "2416a316-a2a3-4a0d-81e9-7411939631ba",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "226be1c3-de38-41d5-a769-f8a036adf5e0",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -142,7 +162,7 @@
                     "name": "New action",
                     "type": "Value",
                     "id": "1e9f318f-d705-41ca-ba79-723d8a94f917",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -157,6 +177,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "SaltoObst",
+            "id": "7f3556c4-17af-4b8f-a804-809e66a96689",
+            "actions": [
+                {
+                    "name": "JumpObs",
+                    "type": "Button",
+                    "id": "68cae9f2-f1c3-47e2-9432-909e142b7107",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e2ec9a5d-95f5-4d6a-af84-371f92b9d17f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpObs",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
