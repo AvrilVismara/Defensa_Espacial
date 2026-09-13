@@ -4,16 +4,17 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Bullet
+  - building
+  - meteorite
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - obstacleLayer
+  - 
   - Water
   - UI
-  - groundLayer
-  - PlayerLayer
+  - 
+  - 
   - 
   - 
   - 
