@@ -7,7 +7,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private Transform puntoDisparo; // donde sale la bala
     [SerializeField] private GameObject prefabBala;
     [SerializeField] private InventarioJugador inventario; // ref al inventario
-
+    [SerializeField] private Animator animator;
     private float tiempoUltimoDisparo = 0f;
     private bool disparando = false;// Bandera de disparo continuo
 
@@ -21,7 +21,7 @@ public class Shooter : MonoBehaviour
     private void OnEnable()
     {
         inputDeAcciones.Player.Enable();
-
+        animator = GetComponent<Animator>();
         // Suscripción a eventos del Input System ---
         inputDeAcciones.Player.Shoot.performed += OnShootPerformed;
         inputDeAcciones.Player.Shoot.canceled += OnShootCanceled;
@@ -39,11 +39,13 @@ public class Shooter : MonoBehaviour
     private void OnShootPerformed(InputAction.CallbackContext context)
     {
         disparando = true;
+        
     }
 
     private void OnShootCanceled(InputAction.CallbackContext context)
     {
         disparando = false;
+        if (animator != null) animator.SetBool("IsShooting", false);
     }
 
     void Start()
@@ -91,7 +93,8 @@ public class Shooter : MonoBehaviour
         {
             CrearBala(armaActual);
             tiempoUltimoDisparo = Time.time;
-        }
+            if (animator != null) animator.SetBool("IsShooting", true);
+        }  
     }
 
     // Crear la bala en el punto de disparo ---

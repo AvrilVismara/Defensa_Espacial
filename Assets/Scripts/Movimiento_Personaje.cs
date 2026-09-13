@@ -4,26 +4,18 @@ using UnityEngine.InputSystem;
 
 public class Movimiento_Personaje : MonoBehaviour
 {
-    // =========================================================
-    // CONFIGURACIÓN DE MOVIMIENTO
-    // =========================================================
+
     [Header("Movimiento")]
     [SerializeField] private float velocidad = 5f;            // Velocidad base al caminar
     [SerializeField] private float multiplicadorVelocidad = 1.5f; // Factor de multiplicación al correr
     [SerializeField] private float velocidadRotacion = 25f;    // Velocidad con la que el cuerpo se alinea a la cámara
 
-    // =========================================================
-    // CONFIGURACIÓN DE SALTO ESTÁNDAR
-    // =========================================================
     [Header("Salto")]
     [SerializeField] private float fuerzaDeSalto = 5f;        // Fuerza vertical aplicada para saltar
     [SerializeField] private LayerMask capaDelSuelo;          // Máscara para filtrar qué objetos cuentan como suelo
     [SerializeField] private Transform CkeckCapaSuelo;        // Objeto vacío en la base de los pies para el detector
     [SerializeField] private float distanciaSuelo = 0.2f;     // Radio del detector esférico de suelo
 
-    // =========================================================
-    // CONFIGURACIÓN DE SALTO DE OBSTÁCULOS (VAULTING)
-    // =========================================================
     [Header("Saltar Obstaculos")]
     [SerializeField] private Transform OrigenSaltoCkeck;      // Objeto desde donde sale el Raycast (pecho/cintura)
     [SerializeField] private float saltoObsDistancia = 1.2f;  // Distancia frontal máxima que detecta el Raycast
@@ -31,9 +23,6 @@ public class Movimiento_Personaje : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;         // Máscara para detectar únicamente los obstáculos
     [SerializeField] private float offsetAlturaObstaculo = 0.5f; // Altura extra añadida para elevar la meta del salto
 
-    // =========================================================
-    // REFERENCIAS Y VARIABLES DE ESTADO
-    // =========================================================
     [Header("Animaciones")]
     [SerializeField] private Animator animator;              // Referencia al componente Animator
 
@@ -48,9 +37,6 @@ public class Movimiento_Personaje : MonoBehaviour
     private float SaltandoTimer;                              // Temporizador para finalizar la animación
     private Vector3 puntoObstaculo;                           // Punto de impacto procesado del Raycast
 
-    // =========================================================
-    // INICIALIZACIÓN Y EVENTOS DE INPUT
-    // =========================================================
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
