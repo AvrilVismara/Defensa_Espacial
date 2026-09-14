@@ -34,15 +34,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Zoom",
-                    "type": "Value",
-                    "id": "5128923b-8b9a-4bea-a071-da51ba06f583",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "2ab4ad46-5115-4c47-9853-b82fc3ae43cb",
@@ -50,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "56288343-e5c3-46b2-983b-5656a9af80e7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -132,17 +132,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2416a316-a2a3-4a0d-81e9-7411939631ba",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "226be1c3-de38-41d5-a769-f8a036adf5e0",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -151,32 +140,15 @@
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Look",
-            "id": "fbda410d-60ce-4691-bdda-d656c1d31fc2",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Value",
-                    "id": "1e9f318f-d705-41ca-ba79-723d8a94f917",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "ee03e3b5-1d49-4fb4-b715-732c938840a5",
+                    "id": "e8c933fe-3f86-4e5b-b587-49627be69e1a",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

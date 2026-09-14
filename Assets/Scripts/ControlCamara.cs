@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class ControlCamaraShooter : MonoBehaviour
 {
     [Header("Referencias")]
-    [SerializeField] private Transform pivoteCamara; // Objeto CameraPivot
+    [SerializeField] private Transform pivoteCamara; // Objeto CameraPivot (hijo del jugador)
 
     [Header("Sensibilidad y Límites")]
     [SerializeField] private float sensibilidadX = 0.15f;
@@ -26,17 +26,17 @@ public class ControlCamaraShooter : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Mouse.current == null || pivoteCamara == null) return;
 
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
-        // 1. Rotación horizontal Rota todo el cuerpo del jugador
+        // 1. Rotación horizontal (Yaw): Rota todo el cuerpo del jugador sobre el eje Y
         float rotacionY = mouseDelta.x * sensibilidadX;
         transform.Rotate(Vector3.up * rotacionY);
 
-        // 2. Rotación vertical Rota únicamente el CameraPivot para inclinar la vista
+        // 2. Rotación vertical (Pitch): Rota únicamente el CameraPivot en su eje X
         rotacionX -= mouseDelta.y * sensibilidadY;
         rotacionX = Mathf.Clamp(rotacionX, limiteVerticalMin, limiteVerticalMax);
 
