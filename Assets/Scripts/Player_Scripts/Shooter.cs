@@ -8,8 +8,10 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject prefabBala;
     [SerializeField] private InventarioJugador inventario; // ref al inventario
     [SerializeField] private Animator animator;
+    [SerializeField] private LayerMask capasImpacto = ~0; // Capas que detecta el rayo de apuntado
+
     private float tiempoUltimoDisparo = 0f;
-    private bool disparando = false;// Bandera de disparo continuo
+    private bool disparando = false; // Bandera de disparo continuo
 
     private PlayerMovement inputDeAcciones;
 
@@ -22,14 +24,12 @@ public class Shooter : MonoBehaviour
     {
         inputDeAcciones.Player.Enable();
         animator = GetComponent<Animator>();
-        // Suscripción a eventos del Input System ---
         inputDeAcciones.Player.Shoot.performed += OnShootPerformed;
         inputDeAcciones.Player.Shoot.canceled += OnShootCanceled;
     }
 
     private void OnDisable()
     {
-        // Desuscripción para evitar errores ---
         inputDeAcciones.Player.Shoot.performed -= OnShootPerformed;
         inputDeAcciones.Player.Shoot.canceled -= OnShootCanceled;
 
@@ -39,7 +39,6 @@ public class Shooter : MonoBehaviour
     private void OnShootPerformed(InputAction.CallbackContext context)
     {
         disparando = true;
-        
     }
 
     private void OnShootCanceled(InputAction.CallbackContext context)
@@ -50,7 +49,7 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
-        // Obtener el inventario si no está asignado ---
+
         if (inventario == null)
         {
             inventario = GetComponent<InventarioJugador>();
@@ -94,15 +93,33 @@ public class Shooter : MonoBehaviour
             CrearBala(armaActual);
             tiempoUltimoDisparo = Time.time;
             if (animator != null) animator.SetBool("IsShooting", true);
-        }  
+        }
     }
 
-    // Crear la bala en el punto de disparo ---
+    // Crear la bala orientada hacia el punto central de la vista de la cámara
     private void CrearBala(Arma arma)
     {
-        if (prefabBala == null) return;
+        if (prefabBala == null || Camera.main == null) return;
 
-        GameObject bala = Instantiate(prefabBala, puntoDisparo.position, puntoDisparo.rotation);
+        // 1. Raycast desde el centro de la pantalla (punto focal de la cámara en 3D)
+        Ray rayoCamara = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Vector3 puntoObjetivo;
+
+        if (Physics.Raycast(rayoCamara, out RaycastHit hit, 200f, capasImpacto))
+        {
+            puntoObjetivo = hit.point; // Si el rayo choca contra algo, apuntamos ahí
+        }
+        else
+        {
+            puntoObjetivo = rayoCamara.GetPoint(200f); // Si apunta al aire, usamos un punto lejano
+        }
+
+        // 2. Calcular la dirección desde la punta del arma hasta el objetivo en 3D (incluye el ángulo vertical)
+        Vector3 direccionDisparo = (puntoObjetivo - puntoDisparo.position).normalized;
+        Quaternion rotacionBala = Quaternion.LookRotation(direccionDisparo);
+
+        // 3. Instanciar la bala con la rotación inclinada real hacia la retícula
+        GameObject bala = Instantiate(prefabBala, puntoDisparo.position, rotacionBala);
 
         // Pasar el daño del arma a la bala ---
         Bullet componenteBala = bala.GetComponent<Bullet>();

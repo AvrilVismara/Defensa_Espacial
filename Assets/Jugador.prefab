@@ -2476,6 +2476,7 @@ GameObject:
   - component: {fileID: 7591927065787015615}
   - component: {fileID: 286571204872149082}
   - component: {fileID: 2568234837052263272}
+  - component: {fileID: 435666429453959252}
   m_Layer: 0
   m_Name: Jugador
   m_TagString: Player
@@ -2588,16 +2589,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   velocidad: 0
   multiplicadorVelocidad: 0
+  velocidadRotacion: 25
   fuerzaDeSalto: 0
   capaDelSuelo:
     serializedVersion: 2
     m_Bits: 0
   CkeckCapaSuelo: {fileID: 0}
   distanciaSuelo: 0
-  OrigenSaltoCkeck: {fileID: 0}
-  saltoObsDistancia: 1.2
-  duracionAnimacion: 1.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
   animator: {fileID: 0}
+--- !u!114 &435666429453959252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068482032928054765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ba7ebf45bd5ffc42aae87d47bbd1c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shooter
+  puntoDisparo: {fileID: 0}
+  prefabBala: {fileID: 7756147962074382545, guid: 106dd94bf9f6dbc4db2f0bfb6220e16b, type: 3}
+  inventario: {fileID: 0}
+  animator: {fileID: 0}
+  capasImpacto:
+    serializedVersion: 2
+    m_Bits: 4294967295

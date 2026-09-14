@@ -9,8 +9,8 @@ public class ControlCamaraShooter : MonoBehaviour
     [Header("Sensibilidad y Límites")]
     [SerializeField] private float sensibilidadX = 0.15f;
     [SerializeField] private float sensibilidadY = 0.15f;
-    [SerializeField] private float limiteVerticalMin = -30f; // Límite para mirar abajo
-    [SerializeField] private float limiteVerticalMax = 60f;  // Límite para mirar arriba
+    [SerializeField] private float limiteVerticalMin = -50f; // Límite para mirar abajo
+    [SerializeField] private float limiteVerticalMax = 90f;  // Límite para mirar arriba
 
     private float rotacionX = 0f;
 

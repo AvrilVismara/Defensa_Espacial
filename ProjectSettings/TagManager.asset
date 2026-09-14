@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - building
-  - meteorite
+  - Meteorites
   layers:
   - Default
   - TransparentFX

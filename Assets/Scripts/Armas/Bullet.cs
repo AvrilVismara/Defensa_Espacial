@@ -26,11 +26,20 @@ public class Bullet : MonoBehaviour
 
         haImpactado = true;
 
-        // Aplicar daño (pendiente: conectar con vida del meteorito)
-        Debug.Log($"Bullet impactó con {other.name} (Daño: {danio})");
+        // Aplicar daño a meteoritos ---
+        if (other.CompareTag("Meteorites"))
+        {
+            MeteoriteMovement meteorito = other.GetComponent<MeteoriteMovement>();
+            if (meteorito != null)
+            {
+                meteorito.RecibirDanio(danio);
+                Debug.Log($"Bullet impactó con {other.name} (Daño: {danio})");
+            }
+        }
 
         Destroy(gameObject);
     }
+
 
     // Método público para configurar el daño desde el script Shooter
     public void Configurar(float danioRecibido)

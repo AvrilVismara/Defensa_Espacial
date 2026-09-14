@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ametralladora
   m_EditorClassIdentifier: Assembly-CSharp::ConfigAmetralladoraSO
   nombreArma: Ametralladora
-  municionMaxima: 100
+  municionMaxima: 400
   cadencia: 0.1
   danio: 7
   automatica: 1

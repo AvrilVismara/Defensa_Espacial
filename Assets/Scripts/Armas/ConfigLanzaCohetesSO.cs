@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NuevaPistola", menuName = "Armas/Pistola")]
-public class ConfigPistolaSO : ScriptableObject
+[CreateAssetMenu(fileName = "NuevaLanzaCohetes", menuName = "Armas/LanzaCohetes")]
+public class ConfigLanzaCohetesSO : ScriptableObject
 {
     [Header("CONFIGURACIÓN GENERAL")]
     public string nombreArma = "Pistola";
