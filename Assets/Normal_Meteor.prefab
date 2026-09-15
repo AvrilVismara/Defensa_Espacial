@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6479651518353323813}
   - component: {fileID: 6888453339252617331}
   - component: {fileID: 8760575613983374610}
-  - component: {fileID: 7021559990992953641}
-  m_Layer: 0
+  - component: {fileID: 8654456545930000312}
+  m_Layer: 7
   m_Name: Normal_Meteor
   m_TagString: Meteorites
   m_Icon: {fileID: 0}
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteMovement
   building: {fileID: 0}
   meteorite: {fileID: 243165357697072706}
-  speed: 10
+  speed: 20
   health: 50
---- !u!54 &7021559990992953641
+--- !u!54 &8654456545930000312
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,5 +155,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0

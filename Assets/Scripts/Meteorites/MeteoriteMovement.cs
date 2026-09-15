@@ -5,19 +5,13 @@ public class MeteoriteMovement : MonoBehaviour
     [SerializeField] private GameObject building;
     [SerializeField] private GameObject meteorite;
 
+    [SerializeField] private int speed;
+    [SerializeField] private float health;
 
-    [SerializeField] int speed;
-
-    [SerializeField] float health;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Método público para que el Spawner le asigne su objetivo específico
+    public void AsignarObjetivo(GameObject nuevoObjetivo)
     {
-        if(building == null)
-        {
-            building = GameObject.FindGameObjectWithTag("building");
-        }
+        building = nuevoObjetivo;
     }
 
     // Update is called once per frame
@@ -26,7 +20,8 @@ public class MeteoriteMovement : MonoBehaviour
         if (building != null)
         {
             Vector3 direction = (building.transform.position - transform.position).normalized;
-            transform.Translate(direction * Time.deltaTime * speed);
+
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
         else
         {
@@ -38,7 +33,7 @@ public class MeteoriteMovement : MonoBehaviour
     public void RecibirDanio(float cantidad)
     {
         health -= cantidad;
-        
+
         if (health <= 0)
         {
             Destruir();
@@ -51,17 +46,13 @@ public class MeteoriteMovement : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    private void OnCollisionEnter(Collision other)//para detectar colision y destruir enemigo - Recibe datos
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("building"))//indica que objeto toca
+        // Detecta si choca contra cualquier edificio que empiece con "building" 
+        // o puedes usar other.gameObject.CompareTag(building.tag) para asegurarte que colisiona con su blanco exacto.
+        if (other.gameObject.tag.StartsWith("building"))
         {
-
             Destroy(gameObject);
-            //meteorite = null;
-            Debug.Log("el meteorito hizo bum");
         }
     }
 }
-
-

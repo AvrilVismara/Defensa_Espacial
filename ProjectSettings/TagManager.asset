@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - building
   - Meteorites
+  - building 1
+  - building 2
+  - building 3
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - PlayerLayer
-  - 
+  - Meteor_Layer
   - 
   - 
   - 
