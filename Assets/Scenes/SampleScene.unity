@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 14363058}
   m_Layer: 0
   m_Name: Building 5
-  m_TagString: building 2
+  m_TagString: building2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8622,10 +8622,10 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
-  - building 1
-  - building 1
-  - building 1
-  cantidadesMaximas: 010000000100000001000000
+  - building1
+  - building1
+  - building1
+  cantidadesMaximas: 020000000200000002000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 313532763}
   retrasoSiguienteOleada: 2
@@ -9641,9 +9641,9 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
-  - building 2
-  - building 2
-  - building 2
+  - building2
+  - building2
+  - building2
   cantidadesMaximas: 010000000100000001000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 1418601518}
@@ -10687,7 +10687,7 @@ GameObject:
   - component: {fileID: 485121559}
   m_Layer: 0
   m_Name: Building 6
-  m_TagString: building 1
+  m_TagString: building1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18459,7 +18459,6 @@ GameObject:
   - component: {fileID: 1247224325}
   - component: {fileID: 1247224324}
   - component: {fileID: 1247224323}
-  - component: {fileID: 1247224326}
   m_Layer: 0
   m_Name: Suelo
   m_TagString: Untagged
@@ -18561,33 +18560,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247224321}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1247224326
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247224321}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!4 &1250944970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 405256, guid: c44bd9bdc114d4a60932c0087d9d1732, type: 3}
@@ -20907,9 +20879,9 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
-  - building 3
-  - building 3
-  - building 3
+  - building3
+  - building3
+  - building3
   cantidadesMaximas: 010000000100000001000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 0}
@@ -21195,7 +21167,7 @@ GameObject:
   - component: {fileID: 1453490243}
   m_Layer: 0
   m_Name: Building 4
-  m_TagString: building 3
+  m_TagString: building3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27534,7 +27506,7 @@ GameObject:
   - component: {fileID: 1620335014}
   m_Layer: 0
   m_Name: Building 3
-  m_TagString: building 2
+  m_TagString: building2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35652,7 +35624,7 @@ GameObject:
   - component: {fileID: 1674263601}
   m_Layer: 0
   m_Name: Building 1
-  m_TagString: building 1
+  m_TagString: building1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52120,7 +52092,7 @@ GameObject:
   - component: {fileID: 1977786909}
   m_Layer: 0
   m_Name: Building 2
-  m_TagString: building 3
+  m_TagString: building3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60034,7 +60006,7 @@ Transform:
   m_GameObject: {fileID: 1977786908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 2.0932, z: 5.22}
+  m_LocalPosition: {x: 0.36, y: 2.0932, z: 5.22}
   m_LocalScale: {x: 0.20444515, y: 0.16424367, z: 0.2516488}
   m_ConstrainProportionsScale: 0
   m_Children: []

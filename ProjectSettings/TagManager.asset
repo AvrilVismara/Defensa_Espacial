@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Meteorites
   - building 1
-  - building 2
-  - building 3
+  - building1
+  - building2
+  - building3
   layers:
   - Default
   - TransparentFX
