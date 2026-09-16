@@ -8621,11 +8621,17 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building1
   - building1
   - building1
-  cantidadesMaximas: 020000000200000002000000
+  - building1
+  - building1
+  - building1
+  cantidadesMaximas: 020000000200000002000000020000000200000002000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 313532763}
   retrasoSiguienteOleada: 2
@@ -9725,11 +9731,17 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building2
   - building2
   - building2
-  cantidadesMaximas: 010000000100000001000000
+  - building2
+  - building2
+  - building2
+  cantidadesMaximas: 010000000100000001000000010000000100000001000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 1418601518}
   retrasoSiguienteOleada: 2
@@ -21643,11 +21655,17 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
   - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building3
   - building3
   - building3
-  cantidadesMaximas: 010000000100000001000000
+  - building3
+  - building3
+  - building3
+  cantidadesMaximas: 010000000100000001000000010000000100000001000000
   tiempoEntreSpawns: 2
   siguienteSpawner: {fileID: 0}
   retrasoSiguienteOleada: 2

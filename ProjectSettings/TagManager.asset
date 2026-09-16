@@ -9,6 +9,13 @@ TagManager:
   - building1
   - building2
   - building3
+  - Pole
+  - Reach
+  - Vault
+  - CinemachineTarget
+  - Slide
+  - Deep Jump
+  - Bullet
   layers:
   - Default
   - TransparentFX
