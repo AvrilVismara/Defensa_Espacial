@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6479651518353323813}
   - component: {fileID: 6888453339252617331}
   - component: {fileID: 8760575613983374610}
-  - component: {fileID: -4672849603961219806}
+  - component: {fileID: 8654456545930000312}
   m_Layer: 7
-  m_Name: Small_Meteor
+  m_Name: Normal_Meteor
   m_TagString: Meteorites
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.45, y: 34.85, z: -35.64}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteMovement
   building: {fileID: 0}
   meteorite: {fileID: 243165357697072706}
-  speed: 25
-  health: 30
---- !u!54 &-4672849603961219806
+  speed: 10
+  health: 50
+--- !u!54 &8654456545930000312
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -18,7 +18,7 @@ MonoBehaviour:
   danio: 7
   automatica: 1
   dispersion: 1.5
-  balasPorRafaga: 5
+  balasPorRafaga: 10
   dispersionAdicional: 20
   danioExtra: 0
   tiempoEnfriamiento: 0.5

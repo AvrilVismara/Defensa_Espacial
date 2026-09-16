@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5448f2840827e0245bdb182f38e71954, type: 3}
   m_Name: LanzaCohetes
   m_EditorClassIdentifier: Assembly-CSharp::ConfigPistolaSO
-  nombreArma: Pistola
+  nombreArma: LanzaCohetes
   municionMaxima: 12
   cadencia: 0.5
   danio: 70
