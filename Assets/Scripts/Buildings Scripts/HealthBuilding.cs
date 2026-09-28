@@ -1,31 +1,28 @@
+using System;
 using UnityEngine;
 
 public class HealthBuilding : MonoBehaviour
 {
     [SerializeField] private GameObject meteorite;
     [SerializeField] private int health;
+    private int maxHealth;
+    public event Action<float, float> OnDamage;
 
-    
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        
+        maxHealth = health; // Guardamos la salud inicial
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
     private void OnCollisionEnter(Collision other)//para detectar colision y destruir enemigo - Recibe datos
     {
-        if (other.gameObject.CompareTag("meteorite"))//indica que objeto toca
+        if (other.gameObject.CompareTag("Meteorites"))//indica que objeto toca
+
         {
             health--;
-            Debug.Log("El edificio recibio daño");
-            
+            // Invocamos el evento enviando la salud actual y la máxima
+            OnDamage?.Invoke(health, maxHealth);
+
+            Debug.Log("El edificio recibió daño. Salud actual: " + health);
         }
         if (health <= 0)
         {
