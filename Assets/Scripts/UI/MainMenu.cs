@@ -4,28 +4,28 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuUI;
-    [SerializeField] private GameObject controlsMenuUI;
+    [SerializeField] private GameObject optionsMenuUI;
 
     [SerializeField] private GameObject creditsMenuUI;
 
     public void ShowMainMenu()
     {
         mainMenuUI.SetActive(true);
-        controlsMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
         creditsMenuUI.SetActive(false);
     }
 
-    public void ShowControls()
+    public void ShowOptions()
     {
         mainMenuUI.SetActive(false);
-        controlsMenuUI.SetActive(true);
+        optionsMenuUI.SetActive(true);
         creditsMenuUI.SetActive(false);
     }
 
     public void ShowCredits()
     {
         mainMenuUI.SetActive(false);
-        controlsMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
         creditsMenuUI.SetActive(true);
     }
 
