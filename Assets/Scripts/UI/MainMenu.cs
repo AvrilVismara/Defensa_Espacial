@@ -34,4 +34,9 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuUI");
+    }
+
 }
