@@ -7,6 +7,12 @@ public class PauseGame : MonoBehaviour
     [SerializeField] private GameObject menuPause;
 
 
+    //Audio
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip pauseSound;
+
+
 
     [Header("Scripts a desactivar al pausar")]
     [SerializeField] private MonoBehaviour scriptCamara;
@@ -33,6 +39,8 @@ public class PauseGame : MonoBehaviour
         if (menuPause != null)
             menuPause.SetActive(false);
 
+        audioSource.PlayOneShot(pauseSound);
+
         Time.timeScale = 1f;
         gamePaused = false;
 
@@ -48,6 +56,8 @@ public class PauseGame : MonoBehaviour
     {
         if (menuPause != null)
             menuPause.SetActive(true);
+
+        audioSource.PlayOneShot(pauseSound);
 
         Time.timeScale = 0f;
         gamePaused = true;
