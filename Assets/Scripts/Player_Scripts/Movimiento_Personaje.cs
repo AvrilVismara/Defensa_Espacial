@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +19,24 @@ public class Movimiento_Personaje : MonoBehaviour
 
     [Header("Animaciones")]
     [SerializeField] private Animator animator;              // Referencia al componente Animator
+    [SerializeField] private float duracionTranscionArma = 0.15f; // Suavizado de la transición de armas
+
+    [Header("Nombres de Animaciones de Armas")]
+    [SerializeField] private string nombreAnimacionRifle;
+    [SerializeField] private string nombreAnimacionLanzacohetes;
+    [SerializeField] private float velocidadTransicionPeso = 5f;
+
+    private int indiceCapaUpperbody = 1;
+    private Coroutine Weigthlayer;
+    
+    public enum TipoArmaEquipada
+    {
+        Ninguna,
+        Rifle,
+        Lanzacohetes
+    }
+    private TipoArmaEquipada armaActual = TipoArmaEquipada.Ninguna;
+   
 
     private Rigidbody rb;                                     // Referencia al componente de físicas
     private Collider miCollider;                              // Referencia al Collider del personaje (CapsuleCollider)
@@ -49,6 +69,9 @@ public class Movimiento_Personaje : MonoBehaviour
         inputDeAcciones.Player.Run.canceled += OnRunCanceled;
 
         inputDeAcciones.Player.Jump.performed += OnJumpPerformed;
+
+        inputDeAcciones.Player.SelectRifle.performed += OnSelectRiflePerformed;
+        inputDeAcciones.Player.SelectRocket.performed += OnSelectRocketPerformed;
     }
 
     private void OnDisable()
@@ -62,6 +85,9 @@ public class Movimiento_Personaje : MonoBehaviour
         inputDeAcciones.Player.Jump.performed -= OnJumpPerformed;
 
         inputDeAcciones.Player.Disable();
+
+        inputDeAcciones.Player.SelectRifle.performed -= OnSelectRiflePerformed;
+        inputDeAcciones.Player.SelectRocket.performed -= OnSelectRocketPerformed;
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context) => inputDeMovimiento = context.ReadValue<Vector2>();
@@ -78,7 +104,33 @@ public class Movimiento_Personaje : MonoBehaviour
         }
     }
 
+    private void OnSelectRiflePerformed(InputAction.CallbackContext context)
+    {
+        CambiarAnimacionArma(nombreAnimacionRifle);
+    }
 
+    private void OnSelectRocketPerformed(InputAction.CallbackContext context)
+    {
+        CambiarAnimacionArma(nombreAnimacionLanzacohetes);
+    }
+
+    private void CambiarAnimacionArma(string nombreEstado)
+    {
+        if (animator != null)
+        {
+            animator.CrossFade(nombreEstado, duracionTranscionArma,indiceCapaUpperbody);
+            TransicionarpesoCapa(1f);
+        }
+    }
+
+    private void DesequiparArma()
+    {
+        if (animator != null)
+        {
+            // Apagamos la capa UpperBody
+            animator.SetLayerWeight(indiceCapaUpperbody, 0f);
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -137,5 +189,30 @@ public class Movimiento_Personaje : MonoBehaviour
         Vector3 targetVelocity = direction * currentSpeed;
 
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+    }
+
+    private void TransicionarpesoCapa(float pesoObjetivo)
+    {
+        if (Weigthlayer != null)
+
+        {
+            StopCoroutine(Weigthlayer);
+        }
+        Weigthlayer = StartCoroutine(RutinaLerpPesoCapa(pesoObjetivo));
+    }
+
+    private IEnumerator RutinaLerpPesoCapa(float pesoObjetivo)
+    {
+        float pesoInicial = animator.GetLayerWeight(indiceCapaUpperbody);
+        float tiempo = 0f;
+
+        while (tiempo < 1f)
+        {
+            tiempo += Time.deltaTime * velocidadTransicionPeso;
+            float nuevoPeso = Mathf.Lerp(pesoInicial, pesoObjetivo, tiempo);
+
+            animator.SetLayerWeight(indiceCapaUpperbody, nuevoPeso);
+            yield return null;
+        }
     }
 }

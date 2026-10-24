@@ -8931,6 +8931,10 @@ MonoBehaviour:
   CkeckCapaSuelo: {fileID: 1848903006}
   distanciaSuelo: 0.2
   animator: {fileID: 111372493}
+  duracionTranscionArma: 0.15
+  nombreAnimacionRifle: nombreAnimacionRifle
+  nombreAnimacionLanzacohetes: nombreAnimacionLanzacohetes
+  velocidadTransicionPeso: 5
 --- !u!114 &111372496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27792,6 +27796,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4030408888643674700, guid: ae010697bc306e144885cc0681c87510, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4369955273773594870, guid: ae010697bc306e144885cc0681c87510, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -27884,6 +27892,10 @@ PrefabInstance:
       propertyPath: origenRaycastCabeza
       value: 
       objectReference: {fileID: 1761444027}
+    - target: {fileID: 9147283267265821536, guid: ae010697bc306e144885cc0681c87510, type: 3}
+      propertyPath: nombreAnimacionRifle
+      value: nombreAnimacionRifle
+      objectReference: {fileID: 0}
     - target: {fileID: 9147283267265821536, guid: ae010697bc306e144885cc0681c87510, type: 3}
       propertyPath: obstacleLayer.m_Bits
       value: 8
