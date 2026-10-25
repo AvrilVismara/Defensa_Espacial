@@ -1,27 +1,39 @@
 using UnityEngine;
 
+// Esta línea asegura que Unity te avise si olvidás ponerle un Rigidbody al meteorito
+[RequireComponent(typeof(Rigidbody))]
 public class MeteoriteMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject building;
-    [SerializeField] private GameObject meteorite;
+    public GameObject building;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float health = 10f;
 
-    [SerializeField] private int speed;
-    [SerializeField] private float health;
+    private Rigidbody rb;
 
-    // Método público para que el Spawner le asigne su objetivo específico
+    private void Start()
+    {
+        // Obtenemos la referencia al Rigidbody apenas nace el meteorito
+        rb = GetComponent<Rigidbody>();
+    }
+
     public void AsignarObjetivo(GameObject nuevoObjetivo)
     {
         building = nuevoObjetivo;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Para físicas SIEMPRE usamos FixedUpdate en lugar de Update
+    void FixedUpdate()
     {
         if (building != null)
         {
+            // Calculamos la dirección
             Vector3 direction = (building.transform.position - transform.position).normalized;
 
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            // Calculamos cuál será la próxima posición usando Time.fixedDeltaTime
+            Vector3 nuevaPosicion = transform.position + direction * speed * Time.fixedDeltaTime;
+
+            // Movemos el Rigidbody hacia esa posición calculando colisiones en el camino
+            rb.MovePosition(nuevaPosicion);
         }
         else
         {
@@ -29,7 +41,6 @@ public class MeteoriteMovement : MonoBehaviour
         }
     }
 
-    // Recibir daño de las balas ---
     public void RecibirDanio(float cantidad)
     {
         health -= cantidad;
@@ -40,19 +51,19 @@ public class MeteoriteMovement : MonoBehaviour
         }
     }
 
-    // Destruir por balas ---
     private void Destruir()
     {
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        // Detecta si choca contra cualquier edificio que empiece con "building" 
-        // o puedes usar other.gameObject.CompareTag(building.tag) para asegurarte que colisiona con su blanco exacto.
-        if (other.gameObject.tag.StartsWith("building"))
+        Debug.Log("Trigger detectado contra: " + other.gameObject.name);
+
+        if (other.CompareTag("building"))
         {
             Destroy(gameObject);
+            Debug.Log("Meteoro Destruido");
         }
     }
 }

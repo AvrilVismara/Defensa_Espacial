@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Bullet
+  - Meteorites
+  - building
+  - building 2
+  - building 3
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,7 @@ TagManager:
   - UI
   - groundLayer
   - PlayerLayer
-  - 
+  - BuildingLayer
   - 
   - 
   - 
