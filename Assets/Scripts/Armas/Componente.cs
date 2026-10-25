@@ -32,9 +32,9 @@ public class ComponenteArma : MonoBehaviour
     private void CrearArma()
     {
         // Intentar crear el arma según el tipo de configuración
-        if (configuracion is ConfigLanzaCohetesSO LanzaCohetesConfig)
+        if (configuracion is ConfigPistolaSO pistolaConfig)
         {
-            arma = LanzaCohetesConfig.CrearArma();
+            arma = pistolaConfig.CrearArma();
         }
         else if (configuracion is ConfigAmetralladoraSO ametralladoraConfig)
         {

@@ -4,17 +4,6 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Meteorites
-  - building 1
-  - building1
-  - building2
-  - building3
-  - Pole
-  - Reach
-  - Vault
-  - CinemachineTarget
-  - Slide
-  - Deep Jump
   - Bullet
   layers:
   - Default
@@ -23,8 +12,8 @@ TagManager:
   - obstacleLayer
   - Water
   - UI
+  - groundLayer
   - PlayerLayer
-  - Meteor_Layer
   - 
   - 
   - 
