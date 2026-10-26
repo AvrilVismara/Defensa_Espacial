@@ -16,6 +16,16 @@ public class InventarioJugador : MonoBehaviour
     [SerializeField] private string nombreLayerUpperBody = "UpperBody";
     [SerializeField] private List<GameObject> modelosArmasEnMano;
 
+    [Header("Control IK (Manos)")]
+    [SerializeField] private IK scriptIK;
+    // Lista para poner el LeftHandTarget de cada arma (en el mismo orden que los modelos)
+    [SerializeField] private List<Transform> targetsManoIzquierdaIK;
+
+    [Header("Transiciones Suaves")]
+    [SerializeField] private float velocidadTransicionAnimacion = 8f;
+    private float pesoCapaObjetivo = 0f;
+    private float pesoCapaActual = 0f;
+
     private int upperBodyLayerIndex;
     private void Start()
     {
@@ -36,6 +46,16 @@ public class InventarioJugador : MonoBehaviour
                     modeloArma.SetActive(false);
                 }
             }
+        }
+    }
+
+    private void Update()
+    {
+        // Interpolamos el peso de la capa UpperBody de forma suave
+        if (animator != null && upperBodyLayerIndex != -1)
+        {
+            pesoCapaActual = Mathf.Lerp(pesoCapaActual, pesoCapaObjetivo, Time.deltaTime * velocidadTransicionAnimacion);
+            animator.SetLayerWeight(upperBodyLayerIndex, pesoCapaActual);
         }
     }
     public void AgregarArma(Arma nuevaArma)
@@ -84,26 +104,74 @@ public class InventarioJugador : MonoBehaviour
 
     public void SeleccionarArma(int indice)
     {
+        if (armaActual == indice)
+        {
+            DesequiparArma();
+            return;
+        }
+
+        // 1. PARTE VISUAL
+        if (animator != null && upperBodyLayerIndex != -1)
+        {
+            animator.SetLayerWeight(upperBodyLayerIndex, 1f);
+        }
+        pesoCapaObjetivo = 1f;
+        for (int i = 0; i < modelosArmasEnMano.Count; i++)
+        {
+            if (modelosArmasEnMano[i] != null)
+            {
+                modelosArmasEnMano[i].SetActive(i == indice);
+            }
+        }
+
+        // --- NUEVO: ACTIVAR IK ---
+        if (scriptIK != null && targetsManoIzquierdaIK.Count > indice)
+        {
+            scriptIK.objetivoManoIzquierda = targetsManoIzquierdaIK[indice];
+            scriptIK.pesoObjetivo = 1f;
+        }
+        // -------------------------
+
+        // 2. PARTE LÓGICA
+        armaActual = indice;
+
         if (indice >= 0 && indice < armas.Count)
         {
-            armaActual = indice;
             Debug.Log($"Arma seleccionada: {armas[armaActual].Nombre}");
-            if (animator != null)
-            {
-                animator.SetLayerWeight(upperBodyLayerIndex, 1f);
-            }
-
-            // 2. Apagar todas las armas de la mano y prender solo la que corresponde
-            for (int i = 0; i < modelosArmasEnMano.Count; i++)
-            {
-                if (modelosArmasEnMano[i] != null)
-                {
-                    // Si el índice coincide, se activa. Si no, se desactiva.
-                    modelosArmasEnMano[i].SetActive(i == indice);
-                }
-            }
             OnArmaCambiada?.Invoke(armas[armaActual]);
         }
+
+    }
+
+    // Nuevo método para apagar todo y volver al estado desarmado
+    public void DesequiparArma()
+    {
+        Debug.Log("Guardando arma...");
+        armaActual = -1;
+
+        if (animator != null && upperBodyLayerIndex != -1)
+        {
+            animator.SetLayerWeight(upperBodyLayerIndex, 0f);
+        }
+        pesoCapaObjetivo = 0f;
+        for (int i = 0; i < modelosArmasEnMano.Count; i++)
+        {
+            if (modelosArmasEnMano[i] != null)
+            {
+                modelosArmasEnMano[i].SetActive(false);
+            }
+        }
+
+        // --- NUEVO: DESACTIVAR IK ---
+        if (scriptIK != null)
+        {
+            scriptIK.pesoObjetivo = 0f;
+            // No hacemos objetivoManoIzquierda = null acá, porque si no la mano se cae de golpe 
+            // antes de que el Lerp termine. El peso bajando a 0 se encarga de soltarla suavemente.
+        }
+        // ----------------------------
+
+        OnArmaCambiada?.Invoke(null);
     }
 
     public bool DispararArmaActual()
