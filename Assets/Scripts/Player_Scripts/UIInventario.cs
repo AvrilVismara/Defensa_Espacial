@@ -51,7 +51,7 @@ public class UIInventario : MonoBehaviour
     {
         float valor = context.ReadValue<float>();
         int indice = Mathf.RoundToInt(valor) - 1;
-
+        Debug.Log($"[INPUT DETECTADO] Tecla presionada con valor: {valor} -> Índice calculado: {indice}");
         if (indice < 0) return;
 
         if (inventario != null)
