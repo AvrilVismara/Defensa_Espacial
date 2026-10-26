@@ -15,6 +15,8 @@ public class InventarioJugador : MonoBehaviour
     [SerializeField] private GameObject modeloArmaEnMano; // El GameObject del arma emparentado al hueso
     [SerializeField] private string nombreLayerUpperBody = "UpperBody";
     [SerializeField] private List<GameObject> modelosArmasEnMano;
+    [SerializeField] private string parametroTipoArma = "TipoArma";
+    private int hashTipoArma;
 
     [Header("Control IK (Manos)")]
     [SerializeField] private IK scriptIK;
@@ -33,6 +35,7 @@ public class InventarioJugador : MonoBehaviour
         if (animator != null)
         {
             upperBodyLayerIndex = animator.GetLayerIndex(nombreLayerUpperBody);
+            hashTipoArma = Animator.StringToHash(parametroTipoArma);
             animator.SetLayerWeight(upperBodyLayerIndex, 0f);
         }
 
@@ -109,13 +112,14 @@ public class InventarioJugador : MonoBehaviour
             DesequiparArma();
             return;
         }
-
+        pesoCapaObjetivo = 1f;
         // 1. PARTE VISUAL
         if (animator != null && upperBodyLayerIndex != -1)
         {
             animator.SetLayerWeight(upperBodyLayerIndex, 1f);
+            animator.SetFloat(hashTipoArma, (float)indice);
         }
-        pesoCapaObjetivo = 1f;
+        
         for (int i = 0; i < modelosArmasEnMano.Count; i++)
         {
             if (modelosArmasEnMano[i] != null)
