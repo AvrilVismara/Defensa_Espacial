@@ -5,6 +5,7 @@ public class IK : MonoBehaviour
     [Header("Configuración IK")]
     [SerializeField] private Animator animator;
     public Transform objetivoManoIzquierda;
+    public Transform objetivoManoDerecha;
 
     [Range(0, 1)] public float pesoIK = 0f;      // Peso actual
     public float pesoObjetivo = 0f;              // A dónde queremos llegar (0 o 1)
@@ -27,7 +28,6 @@ public class IK : MonoBehaviour
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, pesoIK);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, pesoIK);
-
             animator.SetIKPosition(AvatarIKGoal.LeftHand, objetivoManoIzquierda.position);
             animator.SetIKRotation(AvatarIKGoal.LeftHand, objetivoManoIzquierda.rotation);
         }
@@ -35,6 +35,19 @@ public class IK : MonoBehaviour
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0f);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0f);
+        }
+
+        if (animator != null && objetivoManoDerecha != null)
+        {
+            animator.SetIKPositionWeight(AvatarIKGoal.RightHand, pesoIK);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightHand, pesoIK);
+            animator.SetIKPosition(AvatarIKGoal.RightHand, objetivoManoDerecha.position);
+            animator.SetIKRotation(AvatarIKGoal.RightHand, objetivoManoDerecha.rotation);
+        }
+        else if (animator != null)
+        {
+            animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
         }
     }
 }

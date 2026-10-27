@@ -22,7 +22,7 @@ public class InventarioJugador : MonoBehaviour
     [SerializeField] private IK scriptIK;
     // Lista para poner el LeftHandTarget de cada arma (en el mismo orden que los modelos)
     [SerializeField] private List<Transform> targetsManoIzquierdaIK;
-
+    [SerializeField] private List<Transform> targetsManoDerechaIK;
     [Header("Transiciones Suaves")]
     [SerializeField] private float velocidadTransicionAnimacion = 8f;
     private float pesoCapaObjetivo = 0f;
@@ -128,10 +128,17 @@ public class InventarioJugador : MonoBehaviour
             }
         }
 
-        // --- NUEVO: ACTIVAR IK ---
-        if (scriptIK != null && targetsManoIzquierdaIK.Count > indice)
+        // --- ACTIVAR IK ---
+        if (scriptIK != null)
         {
-            scriptIK.objetivoManoIzquierda = targetsManoIzquierdaIK[indice];
+            // Asignar target izquierdo si existe en la lista
+            if (targetsManoIzquierdaIK.Count > indice)
+                scriptIK.objetivoManoIzquierda = targetsManoIzquierdaIK[indice];
+
+            // Asignar target derecho si existe en la lista
+            if (targetsManoDerechaIK.Count > indice)
+                scriptIK.objetivoManoDerecha = targetsManoDerechaIK[indice];
+
             scriptIK.pesoObjetivo = 1f;
         }
         // -------------------------
