@@ -35,7 +35,7 @@ public class Laser : ArmaDeFuego
 
         municionActual -= consumoEnergiaPorDisparo;
         float danioTotal = danio + danioExtra;
-        Debug.Log($"⚡ {nombre}: ¡Disparo láser! Daño: {danioTotal}");
+        Debug.Log($"{nombre}: ¡Disparo láser! Daño: {danioTotal}");
         return true;
     }
 

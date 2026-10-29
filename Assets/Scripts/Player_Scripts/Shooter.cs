@@ -74,6 +74,12 @@ public class Shooter : MonoBehaviour
 
         if (disparoExitoso)
         {
+            // ===== DIAGNÓSTICO =====
+            Debug.Log($"🔍 Tipo real del arma: {armaActual.GetType().Name}");
+            Debug.Log($"🔍 ¿Es Laser? {armaActual is Laser}");
+            Debug.Log($"🔍 ¿laserBeam es null? {laserBeam == null}");
+            // =======================
+
             // ← NUEVO: Si el arma es un Láser, usar el LineRenderer
             if (armaActual is Laser)
             {
@@ -90,6 +96,14 @@ public class Shooter : MonoBehaviour
 
             tiempoUltimoDisparo = Time.time;
             if (animator != null) animator.SetBool("IsShooting", true);
+        }
+        else
+        {
+            // ← NUEVO: Si el disparo falla (sin munición), apagar el láser
+            if (armaActual is Laser && laserBeam != null)
+            {
+                laserBeam.ApagarLaser();
+            }
         }
     }
 

@@ -4,35 +4,39 @@ public class LaserBeam : MonoBehaviour
 {
     [Header("Configuración")]
     [SerializeField] private float alcanceMaximo = 100f;
-    [SerializeField] private LayerMask capasImpacto = ~0; // Qué capas puede golpear
-    [SerializeField] private Transform puntoDisparo; // Desde dónde sale el rayo
+    [SerializeField] private LayerMask capasImpacto = ~0;
+    [SerializeField] private Transform puntoDisparo; // ← Asignar el shootingPoint
 
     private LineRenderer lineRenderer;
 
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = false; // Empieza apagado
+        lineRenderer.enabled = false;
     }
 
-    // Este método lo llamará tu Shooter cuando el jugador dispare
     public void DispararLaser(float danio)
     {
-        lineRenderer.enabled = true;
+        if (lineRenderer == null || puntoDisparo == null || Camera.main == null) return;
 
-        // 1. El rayo empieza en el punto de disparo
+        lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, puntoDisparo.position);
 
-        // 2. Lanzamos el Raycast
-        Ray rayo = new Ray(puntoDisparo.position, puntoDisparo.forward);
-        RaycastHit hit;
+        // Calcular la dirección desde el centro de la pantalla (la mira)
+        Ray rayoCamara = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        Vector3 puntoObjetivo;
 
-        if (Physics.Raycast(rayo, out hit, alcanceMaximo, capasImpacto))
+        if (Physics.Raycast(rayoCamara, out RaycastHit hitCamara, alcanceMaximo, capasImpacto))
+            puntoObjetivo = hitCamara.point;
+        else
+            puntoObjetivo = rayoCamara.GetPoint(alcanceMaximo);
+
+        Vector3 direccion = (puntoObjetivo - puntoDisparo.position).normalized;
+
+        if (Physics.Raycast(puntoDisparo.position, direccion, out RaycastHit hit, alcanceMaximo, capasImpacto))
         {
-            // Si golpea algo, el rayo termina ahí
             lineRenderer.SetPosition(1, hit.point);
 
-            // Aplicar daño si es un meteorito
             if (hit.collider.CompareTag("Meteorites"))
             {
                 MeteoriteMovement meteorito = hit.collider.GetComponent<MeteoriteMovement>();
@@ -45,14 +49,12 @@ public class LaserBeam : MonoBehaviour
         }
         else
         {
-            // Si no golpea nada, el rayo llega hasta el alcance máximo
-            lineRenderer.SetPosition(1, puntoDisparo.position + puntoDisparo.forward * alcanceMaximo);
+            lineRenderer.SetPosition(1, puntoDisparo.position + direccion * alcanceMaximo);
         }
     }
 
-    // Para apagar el rayo (ej: cuando el jugador suelta el botón)
     public void ApagarLaser()
     {
-        lineRenderer.enabled = false;
+        if (lineRenderer != null) lineRenderer.enabled = false;
     }
 }
