@@ -16,6 +16,7 @@ TagManager:
   - Slide
   - Deep Jump
   - Bullet
+  - building
   layers:
   - Default
   - TransparentFX

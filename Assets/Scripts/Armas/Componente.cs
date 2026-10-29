@@ -40,6 +40,10 @@ public class ComponenteArma : MonoBehaviour
         {
             arma = ametralladoraConfig.CrearArma();
         }
+        else if (configuracion is ConfigLaserSO laserConfig)
+        {
+            arma = laserConfig.CrearArma();
+        }
         else
         {
             Debug.LogError($"{gameObject.name}: Configuración no válida!");
