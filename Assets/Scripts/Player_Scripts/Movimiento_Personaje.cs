@@ -3,7 +3,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.AI;
+[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
 public class Movimiento_Personaje : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -14,8 +15,14 @@ public class Movimiento_Personaje : MonoBehaviour
     [Header("Salto")]
     [SerializeField] private float fuerzaDeSalto = 5f;        // Fuerza vertical aplicada para saltar
     [SerializeField] private LayerMask capaDelSuelo;          // Máscara para filtrar qué objetos cuentan como suelo
+    [SerializeField] private LayerMask buildings;
     [SerializeField] private Transform CkeckCapaSuelo;        // Objeto vacío en la base de los pies para el detector
     [SerializeField] private float distanciaSuelo = 0.2f;     // Radio del detector esférico de suelo
+    private NavMeshAgent agent;
+
+    private bool EnSuelo = false;
+    private bool Saltando = false;
+    private float tiempoUltimoSalto = 0f;
 
     [Header("Animaciones")]
     [SerializeField] private Animator animator;              // Referencia al componente Animator
@@ -42,8 +49,7 @@ public class Movimiento_Personaje : MonoBehaviour
     private Collider miCollider;                              // Referencia al Collider del personaje (CapsuleCollider)
     private PlayerMovement inputDeAcciones;                   // Clase auto-generada del Input System
     private Vector2 inputDeMovimiento;                        // Entrada analógica o teclado (WASD)
-    private bool Corriendo;                                   // Estado de la acción de correr
-    private bool EnSuelo = false;                             // Confirmación de contacto con la superficie
+    private bool Corriendo;                                   // Estado de la acción de correr                             // Confirmación de contacto con la superficie
 
     private void Awake()
     {
@@ -51,6 +57,7 @@ public class Movimiento_Personaje : MonoBehaviour
         miCollider = GetComponent<Collider>();
         inputDeAcciones = new PlayerMovement();
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
@@ -93,8 +100,11 @@ public class Movimiento_Personaje : MonoBehaviour
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        if (EnSuelo)
+        if (EnSuelo && !Saltando)
         {
+            Saltando = true;
+            tiempoUltimoSalto = Time.time; // Guardamos el momento del salto
+            agent.enabled = false;
             rb.AddForce(Vector3.up * fuerzaDeSalto, ForceMode.Impulse);
             if (animator != null) animator.SetTrigger("Salto");
         }
@@ -116,8 +126,14 @@ public class Movimiento_Personaje : MonoBehaviour
         // 1. Detección de suelo
         if (CkeckCapaSuelo != null)
         {
-            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo);
+            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo | buildings );
+            if (EnSuelo && Saltando && Time.time > tiempoUltimoSalto + 0.2f)
+            {
+                Saltando = false;
+                agent.enabled = true; // Vuelve a anclar el personaje al NavMesh
+            }
         }
+        
 
         // 2. Control de parámetros del Animator
         if (animator != null)
@@ -145,7 +161,7 @@ public class Movimiento_Personaje : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
         cameraForward.y = 0f;
