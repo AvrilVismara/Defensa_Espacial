@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteMovement
   building: {fileID: 0}
-  meteorite: {fileID: 243165357697072706}
-  speed: 12
+  speed: 4
   health: 30
 --- !u!54 &-4672849603961219806
 Rigidbody:

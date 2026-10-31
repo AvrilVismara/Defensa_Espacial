@@ -21,7 +21,7 @@ public class HealthBuilding : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)//para detectar colision y destruir enemigo - Recibe datos
     {
-        if (other.gameObject.CompareTag("meteorite"))//indica que objeto toca
+        if (other.gameObject.CompareTag("Meteorites"))//indica que objeto toca
         {
             health--;
             Debug.Log("El edificio recibio daño");

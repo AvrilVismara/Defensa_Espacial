@@ -11,18 +11,26 @@ public class MeteoriteMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        // Configurar el Rigidbody para física correcta
         if (rb != null)
         {
-            rb.useGravity = false; // Opcional, si no querés gravedad
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic; // Para evitar tunneling
+            rb.useGravity = false;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
+
+        if (building == null)
+            building = GameObject.FindGameObjectWithTag("building");
     }
 
     public void AsignarObjetivo(GameObject nuevoObjetivo)
     {
         building = nuevoObjetivo;
+    }
+
+    //Configurar desde la oleada
+    public void ConfigurarDesdeOleada(float vida, float velocidad)
+    {
+        this.health = vida;
+        this.speed = velocidad;
     }
 
     void FixedUpdate()
@@ -51,7 +59,6 @@ public class MeteoriteMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        // Verificar si el objeto tiene el tag del edificio
         if (other.gameObject.CompareTag("building"))
         {
             Debug.Log($"Meteorito impactó con {other.gameObject.name}");
