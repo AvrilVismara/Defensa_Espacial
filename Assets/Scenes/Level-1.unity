@@ -19441,9 +19441,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1694687509988009475, guid: 508f07b6ad622584498ace25d89734af, type: 3}
+      propertyPath: buildings.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2271920318022242914, guid: 508f07b6ad622584498ace25d89734af, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989164085022046015, guid: 508f07b6ad622584498ace25d89734af, type: 3}
+      propertyPath: camaraPrincipal
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
