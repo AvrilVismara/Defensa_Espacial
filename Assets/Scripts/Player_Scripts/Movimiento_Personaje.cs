@@ -126,35 +126,47 @@ public class Movimiento_Personaje : MonoBehaviour
         // 1. Detección de suelo
         if (CkeckCapaSuelo != null)
         {
-            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo | buildings );
+            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo | buildings);
+
+            // Solo intentamos aterrizar si ya pasaron 0.2 segundos desde que saltamos
             if (EnSuelo && Saltando && Time.time > tiempoUltimoSalto + 0.2f)
             {
                 Saltando = false;
                 agent.enabled = true; // Vuelve a anclar el personaje al NavMesh
             }
-        }
-        
-
-        // 2. Control de parámetros del Animator
-        if (animator != null)
-        {
-            animator.SetBool("EnSuelo", EnSuelo);
-
-            float targetAnimSpeed = (inputDeMovimiento != Vector2.zero) ? (Corriendo ? 2f : 1f) : 0f;
-            animator.SetFloat("velocidad", targetAnimSpeed, 0.1f, Time.deltaTime);
-        }
-
-        // 4. Alineación del cuerpo a la vista de la cámara
-        if (Camera.main != null)
-        {
-            Vector3 cameraForward = Camera.main.transform.forward;
-            cameraForward.y = 0f;
-
-            if (cameraForward.sqrMagnitude > 0.001f)
+            if (EnSuelo && !Saltando)
             {
-                cameraForward.Normalize();
-                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, velocidadRotacion * Time.deltaTime);
+                // Si no hay input, quitamos la gravedad para anclarlo. Si hay input, la activamos para movernos fluido.
+                rb.useGravity = (inputDeMovimiento != Vector2.zero);
+            }
+            else
+            {
+                // Si estamos en el aire (saltando o cayendo), siempre usamos gravedad
+                rb.useGravity = true;
+            }
+
+
+            // 2. Control de parámetros del Animator
+            if (animator != null)
+            {
+                animator.SetBool("EnSuelo", EnSuelo);
+
+                float targetAnimSpeed = (inputDeMovimiento != Vector2.zero) ? (Corriendo ? 2f : 1f) : 0f;
+                animator.SetFloat("velocidad", targetAnimSpeed, 0.1f, Time.deltaTime);
+            }
+
+            // 4. Alineación del cuerpo a la vista de la cámara
+            if (Camera.main != null)
+            {
+                Vector3 cameraForward = Camera.main.transform.forward;
+                cameraForward.y = 0f;
+
+                if (cameraForward.sqrMagnitude > 0.001f)
+                {
+                    cameraForward.Normalize();
+                    Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, velocidadRotacion * Time.deltaTime);
+                }
             }
         }
     }
