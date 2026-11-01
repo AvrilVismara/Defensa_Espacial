@@ -8073,7 +8073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!43 &19192091
 Mesh:
@@ -10692,7 +10691,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -12422,7 +12421,7 @@ GameObject:
   m_TagString: building1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!64 &485121559
 MeshCollider:
@@ -16734,8 +16733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
-  health: 10
+  health: 60
 --- !u!1 &499805513
 GameObject:
   m_ObjectHideFlags: 0
@@ -24596,6 +24594,10 @@ PrefabInstance:
       propertyPath: prefabArmaVisual
       value: 
       objectReference: {fileID: 7756147962074382545, guid: 106dd94bf9f6dbc4db2f0bfb6220e16b, type: 3}
+    - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: configuracionArma
+      value: 
+      objectReference: {fileID: 11400000, guid: 25c90679ed16b734f9bed8d224f14cde, type: 2}
     - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: tiempoReaparicion
       value: 3
@@ -33448,7 +33450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1 &1456179010
 GameObject:
@@ -44123,7 +44124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!4 &1620682529 stripped
 Transform:
@@ -52468,7 +52468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1001 &1679824762
 PrefabInstance:
@@ -74265,7 +74264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!4 &1982755962 stripped
 Transform:

@@ -19,8 +19,7 @@ MonoBehaviour:
   intervaloAparicion: 2
   prefabsMeteoritos:
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
-  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  cantidadMeteoritos: 1
+  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
+  cantidadMeteoritos: 2
   armasDesbloqueadas:
   - Ametralladora

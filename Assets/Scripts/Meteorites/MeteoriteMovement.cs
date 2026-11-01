@@ -3,9 +3,9 @@ using UnityEngine;
 public class MeteoriteMovement : MonoBehaviour
 {
     [SerializeField] private GameObject building;
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float health = 30f;
-
+    [SerializeField] private float speed;
+    [SerializeField] private float health;
+    public float Health => health;
     private Rigidbody rb;
 
     void Start()
@@ -59,7 +59,7 @@ public class MeteoriteMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("building"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("buildings"))
         {
             Debug.Log($"Meteorito impactó con {other.gameObject.name}");
             Destroy(gameObject);
