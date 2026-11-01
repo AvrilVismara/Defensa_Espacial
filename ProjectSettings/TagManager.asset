@@ -16,6 +16,7 @@ TagManager:
   - Slide
   - Deep Jump
   - Bullet
+  - SpawnWeapons
   layers:
   - Default
   - TransparentFX
