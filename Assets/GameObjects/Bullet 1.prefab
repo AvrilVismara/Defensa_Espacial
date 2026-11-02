@@ -173,4 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808d274195517f94a9f6d7a4f48d88c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComponenteArma
-  configuracion: {fileID: 11400000, guid: cbd3ad2af86ad53428bdcd3cd38147ca, type: 2}
+  configuracion: {fileID: 11400000, guid: 03eb40a6ae19a3b4cbf7bda2c42e665c, type: 2}

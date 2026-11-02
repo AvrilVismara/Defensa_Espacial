@@ -82,7 +82,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8863813566461575725
 MonoBehaviour:
@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b351a6d03baaf8a488d6b337281956b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  velocidad: 3
-  tiempoVida: 4
-  danio: 5
+  velocidad: 20
+  tiempoVida: 10
+  danio: 15
 --- !u!114 &-1259603447179812499
 MonoBehaviour:
   m_ObjectHideFlags: 0
