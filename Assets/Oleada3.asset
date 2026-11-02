@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveConfigSO
   nombreOleada: Oleada 3
   numeroOleada: 3
-  indiceSpawner: 0
+  indiceSpawner: 2
   tiempoPreparacion: 15
-  intervaloAparicion: 3
+  intervaloAparicion: 10
   prefabsMeteoritos:
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  cantidadMeteoritos: 3
+  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
+  cantidadMeteoritos: 4
   armasDesbloqueadas:
+  - Ametralladora
+  - LanzaCohetes
   - Laser
