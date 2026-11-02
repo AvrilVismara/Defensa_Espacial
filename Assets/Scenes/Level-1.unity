@@ -8073,7 +8073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1 &32636988
 GameObject:
@@ -8752,13 +8751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e40270f79ce82542a7dc8c2c9252df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawn
-  prefabsMeteoritos:
-  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building1
   - building1
@@ -8766,10 +8758,6 @@ MonoBehaviour:
   - building1
   - building1
   - building1
-  cantidadesMaximas: 020000000200000002000000020000000200000002000000
-  tiempoEntreSpawns: 6
-  siguienteSpawner: {fileID: 313532763}
-  retrasoSiguienteOleada: 10
 --- !u!4 &68302400
 Transform:
   m_ObjectHideFlags: 0
@@ -10606,6 +10594,100 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &202628991
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1611829394}
+    m_Modifications:
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -104.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 58.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 993998891440635438, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: m_Name
+      value: SpawnWeapons (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: prefabArmaVisual
+      value: 
+      objectReference: {fileID: 7756147962074382545, guid: 106dd94bf9f6dbc4db2f0bfb6220e16b, type: 3}
+    - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: configuracionesPosibles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: 'configuracionesPosibles.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: cbd3ad2af86ad53428bdcd3cd38147ca, type: 2}
+    - target: {fileID: 2423947029127717276, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: 'configuracionesPosibles.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 25c90679ed16b734f9bed8d224f14cde, type: 2}
+    - target: {fileID: 5391516888831685983, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f8577a3cb6e394b45a30d4975768fd38, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+--- !u!4 &202628992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+  m_PrefabInstance: {fileID: 202628991}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &209027555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
@@ -11255,13 +11337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e40270f79ce82542a7dc8c2c9252df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawn
-  prefabsMeteoritos:
-  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building2
   - building2
@@ -11269,10 +11344,6 @@ MonoBehaviour:
   - building2
   - building2
   - building2
-  cantidadesMaximas: 010000000100000001000000010000000100000001000000
-  tiempoEntreSpawns: 6
-  siguienteSpawner: {fileID: 1418601518}
-  retrasoSiguienteOleada: 10
 --- !u!4 &313532764
 Transform:
   m_ObjectHideFlags: 0
@@ -17659,7 +17730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1 &499805513
 GameObject:
@@ -20486,15 +20556,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20756,19 +20826,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20776,7 +20846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -21780,19 +21850,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -21800,7 +21870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -24592,6 +24662,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       insertIndex: -1
       addedObject: {fileID: 477650421}
+    - targetCorrespondingSourceObject: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 202628992}
     - targetCorrespondingSourceObject: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2127653825}
@@ -28549,13 +28622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e40270f79ce82542a7dc8c2c9252df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawn
-  prefabsMeteoritos:
-  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
-  - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   tagsEdificios:
   - building3
   - building3
@@ -28563,10 +28629,6 @@ MonoBehaviour:
   - building3
   - building3
   - building3
-  cantidadesMaximas: 010000000100000001000000010000000100000001000000
-  tiempoEntreSpawns: 6
-  siguienteSpawner: {fileID: 0}
-  retrasoSiguienteOleada: 0
 --- !u!4 &1418601519
 Transform:
   m_ObjectHideFlags: 0
@@ -28812,19 +28874,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -28832,7 +28894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -33432,7 +33494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1 &1456179010
 GameObject:
@@ -44295,7 +44356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!4 &1620682529 stripped
 Transform:
@@ -52818,7 +52878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!1001 &1679824762
 PrefabInstance:
@@ -76173,7 +76232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  meteorite: {fileID: 0}
   health: 10
 --- !u!4 &1982755962 stripped
 Transform:
