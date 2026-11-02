@@ -4,7 +4,7 @@ using UnityEngine;
 public class ConfigLanzaCohetesSO : ScriptableObject
 {
     [Header("CONFIGURACIÓN GENERAL")]
-    public string nombreArma = "Pistola";
+    public string nombreArma = "LanzaCohetes";
     public int municionMaxima = 15;
     public float cadencia = 0.5f;
     public float danio = 10f;
@@ -15,7 +15,7 @@ public class ConfigLanzaCohetesSO : ScriptableObject
 
     public Arma CrearArma()
     {
-        return new Pistola(
+        return new LanzaCohetes(
             nombreArma,
             municionMaxima,
             cadencia,
