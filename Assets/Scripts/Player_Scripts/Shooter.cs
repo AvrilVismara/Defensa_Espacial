@@ -45,7 +45,6 @@ public class Shooter : MonoBehaviour
     private void OnShootCanceled(InputAction.CallbackContext context)
     {
         disparando = false;
-        if (animator != null) animator.SetBool("IsShooting", false);
 
         if (laserBeam != null) laserBeam.ApagarLaser();
     }

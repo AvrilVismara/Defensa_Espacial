@@ -158,6 +158,11 @@ public class WeaponPoint : MonoBehaviour
         if (!armaDisponible) return;
         if (!other.CompareTag("Player")) return;
 
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("asdwqdwqdsad");
+        }
+
         InventarioJugador inventario = other.GetComponent<InventarioJugador>();
         if (inventario == null) return;
 
@@ -176,13 +181,15 @@ public class WeaponPoint : MonoBehaviour
             else
             {
                 inventario.RecargarArma(arma.Nombre);
-                Debug.Log($"{arma.Nombre}: Munición recargada.");
+                inventario.EquiparArma(arma.Nombre);
+                Debug.Log($"{arma.Nombre}: Munición recargada y arma equipada");
                 OcultarArmaVisual();
             }
         }
         else
         {
             inventario.AgregarArma(arma);
+            inventario.EquiparArma(arma.Nombre);
             Debug.Log($"{arma.Nombre}: Arma nueva añadida al inventario!");
             OcultarArmaVisual();
         }

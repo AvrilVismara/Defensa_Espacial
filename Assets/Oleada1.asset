@@ -22,4 +22,6 @@ MonoBehaviour:
   - {fileID: 243165357697072706, guid: 6cd429f18fae41343bf2fc85eb97f458, type: 3}
   cantidadMeteoritos: 2
   armasDesbloqueadas:
+  - Laser
+  - LanzaCohetes
   - Ametralladora

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0c76c6eff98cbe4d99a8150ee015739, type: 3}
-  m_Name: LaserNormal
+  m_Name: Laser
   m_EditorClassIdentifier: Assembly-CSharp::ConfigLaserSO
   nombreArma: Laser
   municionMaxima: 200
