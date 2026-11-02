@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 // Agrupamos toda la configuración visual en un solo lugar
 [System.Serializable]
@@ -15,6 +16,10 @@ public struct ConfiguracionVisualArma
 
 public class InventarioJugador : MonoBehaviour
 {
+    [Header("Inputs del Action Map")]
+    [SerializeField] private InputActionReference inputArma1;
+    [SerializeField] private InputActionReference inputArma2;
+    [SerializeField] private InputActionReference inputArma3;
     private List<Arma> armas = new List<Arma>();
     private int armaActual = -1;
 
@@ -38,6 +43,7 @@ public class InventarioJugador : MonoBehaviour
     private float pesoCapaObjetivo = 0f;
     private float pesoCapaActual = 0f;
     private int upperBodyLayerIndex;
+
 
     private void Start()
     {
@@ -64,6 +70,80 @@ public class InventarioJugador : MonoBehaviour
         }
     }
 
+    public void OnEnable()
+    {
+        if (inputArma1 != null)
+        {
+            inputArma1.action.Enable();
+            inputArma1.action.performed += AlPresionarArma1;
+        }
+        if (inputArma2 != null)
+        {
+            inputArma2.action.Enable();
+            inputArma2.action.performed += AlPresionarArma2;
+        }
+        if (inputArma3 != null)
+        {
+            inputArma3.action.Enable();
+            inputArma3.action.performed += AlPresionarArma3;
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (inputArma1 != null) inputArma1.action.performed -= AlPresionarArma1;
+        if (inputArma2 != null) inputArma2.action.performed -= AlPresionarArma2;
+        if (inputArma3 != null) inputArma3.action.performed -= AlPresionarArma3;
+    }
+
+    private void AlPresionarArma1(InputAction.CallbackContext context)
+    {
+        Debug.Log("¡Botón 1 presionado! Buscando Ametralladora...");
+        CambiarArmaPorNombre("Ametralladora");
+    }
+
+    private void AlPresionarArma2(InputAction.CallbackContext context)
+    {
+        Debug.Log("¡Botón 2 presionado! Buscando LanzaCohetes...");
+        CambiarArmaPorNombre("LanzaCohetes");
+    }
+
+    private void AlPresionarArma3(InputAction.CallbackContext context)
+    {
+        Debug.Log("¡Botón 3 presionado! Buscando Laser...");
+        CambiarArmaPorNombre("Laser");
+    }
+
+    public void CambiarArmaPorNombre(string nombreArmaDeseada)
+    {
+        // Buscamos en qué posición de nuestro inventario (lista 'armas') está esta arma específica
+        int indiceDeseado = armas.FindIndex(a => a.Nombre == nombreArmaDeseada);
+
+        if (indiceDeseado != -1) // Si es distinto a -1, significa que SÍ la recogimos
+        {
+            Arma armaDeseada = armas[indiceDeseado];
+
+            if (armaDeseada.MunicionActual > 0)
+            {
+                if (armaActual != indiceDeseado)
+                {
+                    SeleccionarArma(indiceDeseado);
+                }
+                else
+                {
+                    Debug.Log($"Ya tienes {armaDeseada.Nombre} en las manos.");
+                }
+            }
+            else
+            {
+                Debug.Log($"No puedes equipar {armaDeseada.Nombre}, está sin munición.");
+            }
+        }
+        else
+        {
+            Debug.Log($"Cancelado: Todavía no has recogido el arma {nombreArmaDeseada}.");
+        }
+    }
     public void AgregarArma(Arma nuevaArma)
     {
         if (nuevaArma == null) return;
@@ -215,7 +295,7 @@ public class InventarioJugador : MonoBehaviour
         return CambiarAProximaArmaConMunicion();
     }
 
-    private bool CambiarAProximaArmaConMunicion()
+    public bool CambiarAProximaArmaConMunicion()
     {
         if (armas.Count <= 1) return false;
 
@@ -234,7 +314,7 @@ public class InventarioJugador : MonoBehaviour
         return false;
     }
 
-    private bool TieneMunicionSuficiente(Arma arma)
+    public bool TieneMunicionSuficiente(Arma arma)
     {
         if (arma == null || arma.MunicionActual <= 0) return false;
         if (arma is Ametralladora ametralladora)
@@ -252,4 +332,5 @@ public class InventarioJugador : MonoBehaviour
     {
         return new List<Arma>(armas);
     }
+
 }

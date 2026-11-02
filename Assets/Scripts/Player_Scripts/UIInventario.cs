@@ -29,25 +29,25 @@ public class UIInventario : MonoBehaviour
         inputDeAcciones.Player.Enable();
 
         inputDeAcciones.Player.ToggleInventory.performed += OnToggleInventory;
-        inputDeAcciones.Player.SelectWeapon.performed += OnSelectWeapon;
+
     }
 
     private void OnDisable()
     {
         inputDeAcciones.Player.ToggleInventory.performed -= OnToggleInventory;
-        inputDeAcciones.Player.SelectWeapon.performed -= OnSelectWeapon;
+
 
         inputDeAcciones.Player.Disable();
     }
 
     // Abrir/cerrar inventario con "I" ---
-    private void OnToggleInventory(InputAction.CallbackContext context)
+    public void OnToggleInventory(InputAction.CallbackContext context)
     {
         ToggleInventario();
     }
 
     // Seleccionar arma con números 1-9 ---
-    private void OnSelectWeapon(InputAction.CallbackContext context)
+    public void OnSelectWeapon(InputAction.CallbackContext context)
     {
         float valor = context.ReadValue<float>();
         int indice = Mathf.RoundToInt(valor) - 1;
@@ -101,7 +101,7 @@ public class UIInventario : MonoBehaviour
     }
 
     // Actualizar slots cuando cambia el inventario ---
-    private void OnInventarioCambiado(Arma arma)
+    public void OnInventarioCambiado(Arma arma)
     {
         if (inventarioAbierto)
         {
@@ -110,7 +110,7 @@ public class UIInventario : MonoBehaviour
     }
 
     // Actualizar la lista de slots ---
-    private void ActualizarSlots()
+    public void ActualizarSlots()
     {
         // Limpiar slots anteriores ---
         foreach (GameObject slot in slotsActuales)

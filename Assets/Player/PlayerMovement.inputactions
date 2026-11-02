@@ -61,9 +61,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SelectWeapon",
+                    "name": "EquiparArma1",
                     "type": "Value",
                     "id": "3b67bc7e-4cec-42ed-afc4-1f41f9913304",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "EquiparArma2",
+                    "type": "Value",
+                    "id": "3134e789-6d0b-4171-9f29-c23f40491c4c",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "EquiparArma3",
+                    "type": "Value",
+                    "id": "0beca281-e620-4241-b42f-7b1ac4a71c1b",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -183,62 +201,34 @@
                 },
                 {
                     "name": "",
-                    "id": "1b713223-6600-45d0-8c36-bde8895ae77b",
+                    "id": "e6afa1db-ac71-4f89-ab4c-0a8b6fbb652b",
                     "path": "<Keyboard>/1",
                     "interactions": "",
-                    "processors": "Scale",
+                    "processors": "",
                     "groups": "",
-                    "action": "SelectWeapon",
+                    "action": "EquiparArma1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0c5ef116-c393-4d60-bd10-148ea856e0be",
+                    "id": "14b57aba-e0b6-4e2b-bd2c-85498cebeef6",
                     "path": "<Keyboard>/2",
                     "interactions": "",
-                    "processors": "Scale(factor=2)",
+                    "processors": "",
                     "groups": "",
-                    "action": "SelectWeapon",
+                    "action": "EquiparArma2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "97e4d9af-7c1e-4dbd-97f3-44cf4cd131eb",
+                    "id": "a9b9f954-58c7-4f8e-b8cd-a0fa65f51947",
                     "path": "<Keyboard>/3",
                     "interactions": "",
-                    "processors": "Scale(factor=3)",
-                    "groups": "",
-                    "action": "SelectWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "SaltoObst",
-            "id": "7f3556c4-17af-4b8f-a804-809e66a96689",
-            "actions": [
-                {
-                    "name": "JumpObs",
-                    "type": "Button",
-                    "id": "68cae9f2-f1c3-47e2-9432-909e142b7107",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "e2ec9a5d-95f5-4d6a-af84-371f92b9d17f",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JumpObs",
+                    "action": "EquiparArma3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

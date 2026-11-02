@@ -120,7 +120,7 @@ public class WeaponPoint : MonoBehaviour
         return null;
     }
 
-    private void CrearArmaVisual()
+    public void CrearArmaVisual()
     {
         if (armaVisualActual != null)
         {
@@ -144,7 +144,7 @@ public class WeaponPoint : MonoBehaviour
         armaVisualActual.SetActive(false);
     }
 
-    private void OcultarArmaVisual()
+    public void OcultarArmaVisual()
     {
         if (armaVisualActual != null)
         {
@@ -153,7 +153,7 @@ public class WeaponPoint : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (!armaDisponible) return;
         if (!other.CompareTag("Player")) return;
