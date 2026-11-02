@@ -13787,7 +13787,7 @@ GameObject:
   - component: {fileID: 485121560}
   - component: {fileID: 485121559}
   - component: {fileID: 485121565}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building 6
   m_TagString: building1
   m_Icon: {fileID: 0}
@@ -18104,7 +18104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  health: 10
+  health: 200
 --- !u!1 &489358482
 GameObject:
   m_ObjectHideFlags: 0
@@ -45920,7 +45920,7 @@ GameObject:
   - component: {fileID: 1674263602}
   - component: {fileID: 1674263601}
   - component: {fileID: 1674263607}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Building 1
   m_TagString: building1
   m_Icon: {fileID: 0}
@@ -54222,7 +54222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0384fc3bda886fa4a945c0e31b634be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBuilding
-  health: 400
+  health: 200
 --- !u!1001 &1679824762
 PrefabInstance:
   m_ObjectHideFlags: 0
