@@ -1,8 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using TMPro;
-=======
 using UnityEngine.InputSystem;
 
 // Agrupamos toda la configuración visual en un solo lugar
@@ -16,7 +13,6 @@ public struct ConfiguracionVisualArma
     public Transform targetIKDerecha;
     public float idAnimacion; // Valor para el Blend Tree del Animator
 }
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
 
 public class InventarioJugador : MonoBehaviour
 {
@@ -30,12 +26,6 @@ public class InventarioJugador : MonoBehaviour
     public event System.Action<Arma> OnArmaAgregada;
     public event System.Action<Arma> OnArmaRecargada;
     public event System.Action<Arma> OnArmaCambiada;
-<<<<<<< HEAD
-
-
-    public TextMeshProUGUI messageText;
-=======
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
 
     [Header("Configuración Visual de Armas (Cualquier Orden)")]
     [SerializeField] private List<ConfiguracionVisualArma> configuracionesVisuales;
@@ -164,7 +154,6 @@ public class InventarioJugador : MonoBehaviour
         {
             existente.Recargar();
             OnArmaRecargada?.Invoke(existente);
-            messageText.text = $"{existente.Nombre} recargada";
             Debug.Log($"{existente.Nombre} recargada");
         }
         else
@@ -172,7 +161,6 @@ public class InventarioJugador : MonoBehaviour
             armas.Add(nuevaArma);
             if (armas.Count == 1) SeleccionarArma(0);
             OnArmaAgregada?.Invoke(nuevaArma);
-            messageText.text = $"{nuevaArma.Nombre} añadida al inventario";
             Debug.Log($"{nuevaArma.Nombre} añadida al inventario");
         }
     }
@@ -229,12 +217,6 @@ public class InventarioJugador : MonoBehaviour
 
         if (indice >= 0 && indice < armas.Count)
         {
-<<<<<<< HEAD
-            armaActual = indice;
-            messageText.text = $"Arma seleccionada: {armas[armaActual].Nombre}";
-            Debug.Log($"Arma seleccionada: {armas[armaActual].Nombre}");
-            OnArmaCambiada?.Invoke(armas[armaActual]);
-=======
             Arma armaSeleccionada = armas[indice];
             Debug.Log($"Arma seleccionada: {armaSeleccionada.Nombre}");
 
@@ -273,7 +255,6 @@ public class InventarioJugador : MonoBehaviour
                 Debug.LogWarning($"No se encontró configuración visual para: {armaSeleccionada.Nombre}");
 
             OnArmaCambiada?.Invoke(armaSeleccionada);
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
         }
     }
 
@@ -297,37 +278,16 @@ public class InventarioJugador : MonoBehaviour
 
     public bool DispararArmaActual()
     {
-<<<<<<< HEAD
-        if (armaActual < 0 || armaActual >= armas.Count)
-        {
-            messageText.text = "No hay arma seleccionada";
-            Debug.Log("No hay arma seleccionada");
-            return false;
-        }
-=======
         if (armaActual < 0 || armaActual >= armas.Count) return false;
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
 
         Arma arma = armas[armaActual];
 
         if (!TieneMunicionSuficiente(arma))
-<<<<<<< HEAD
-        {
-            messageText.text = $"[{arma.Nombre}] sin munición suficiente. Buscando otra arma...";
-            Debug.Log($"[{arma.Nombre}] sin munición suficiente. Buscando otra arma...");
-=======
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
             return CambiarAProximaArmaConMunicion();
 
         if (arma.Disparar())
         {
             if (!TieneMunicionSuficiente(arma))
-<<<<<<< HEAD
-            {
-                messageText.text = $"[{arma.Nombre}] se quedó sin munición tras el disparo. Cambiando de arma...";
-                Debug.Log($"[{arma.Nombre}] se quedó sin munición tras el disparo. Cambiando de arma...");
-=======
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
                 CambiarAProximaArmaConMunicion();
             return true;
         }
@@ -337,16 +297,7 @@ public class InventarioJugador : MonoBehaviour
 
     public bool CambiarAProximaArmaConMunicion()
     {
-<<<<<<< HEAD
-        if (armas.Count <= 1)
-        {
-            messageText.text = "Sin otras armas disponibles en el inventario.";
-            Debug.LogWarning("Sin otras armas disponibles en el inventario.");
-            return false;
-        }
-=======
         if (armas.Count <= 1) return false;
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
 
         int totalArmas = armas.Count;
         for (int i = 1; i < totalArmas; i++)
@@ -360,12 +311,6 @@ public class InventarioJugador : MonoBehaviour
                 return armas[armaActual].Disparar();
             }
         }
-<<<<<<< HEAD
-
-        messageText.text = "¡Todas las armas del inventario están sin munición!";
-        Debug.LogWarning("¡Todas las armas del inventario están sin munición!");
-=======
->>>>>>> cc4be874cc7a1e6daa2db7a3a09df1f848901efa
         return false;
     }
 
