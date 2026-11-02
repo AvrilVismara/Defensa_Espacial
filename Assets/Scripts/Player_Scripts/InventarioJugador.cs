@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class InventarioJugador : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class InventarioJugador : MonoBehaviour
 
     public event System.Action<Arma> OnArmaAgregada;
     public event System.Action<Arma> OnArmaRecargada;
-    public event System.Action<Arma> OnArmaCambiada; 
+    public event System.Action<Arma> OnArmaCambiada;
+
+
+    public TextMeshProUGUI messageText;
 
     public void AgregarArma(Arma nuevaArma)
     {
@@ -22,6 +26,7 @@ public class InventarioJugador : MonoBehaviour
 
             existente.Recargar();
             OnArmaRecargada?.Invoke(existente);
+            messageText.text = $"{existente.Nombre} recargada";
             Debug.Log($"{existente.Nombre} recargada");
         }
         else
@@ -30,6 +35,7 @@ public class InventarioJugador : MonoBehaviour
             armas.Add(nuevaArma);
             if (armas.Count == 1) SeleccionarArma(0);
             OnArmaAgregada?.Invoke(nuevaArma);
+            messageText.text = $"{nuevaArma.Nombre} añadida al inventario";
             Debug.Log($"{nuevaArma.Nombre} añadida al inventario");
         }
     }
@@ -59,6 +65,7 @@ public class InventarioJugador : MonoBehaviour
         if (indice >= 0 && indice < armas.Count)
         {
             armaActual = indice;
+            messageText.text = $"Arma seleccionada: {armas[armaActual].Nombre}";
             Debug.Log($"Arma seleccionada: {armas[armaActual].Nombre}");
             OnArmaCambiada?.Invoke(armas[armaActual]);
         }
@@ -68,6 +75,7 @@ public class InventarioJugador : MonoBehaviour
     {
         if (armaActual < 0 || armaActual >= armas.Count)
         {
+            messageText.text = "No hay arma seleccionada";
             Debug.Log("No hay arma seleccionada");
             return false;
         }
@@ -76,6 +84,7 @@ public class InventarioJugador : MonoBehaviour
 
         if (!TieneMunicionSuficiente(arma))
         {
+            messageText.text = $"[{arma.Nombre}] sin munición suficiente. Buscando otra arma...";
             Debug.Log($"[{arma.Nombre}] sin munición suficiente. Buscando otra arma...");
             return CambiarAProximaArmaConMunicion();
         }
@@ -87,6 +96,7 @@ public class InventarioJugador : MonoBehaviour
 
             if (!TieneMunicionSuficiente(arma))
             {
+                messageText.text = $"[{arma.Nombre}] se quedó sin munición tras el disparo. Cambiando de arma...";
                 Debug.Log($"[{arma.Nombre}] se quedó sin munición tras el disparo. Cambiando de arma...");
                 CambiarAProximaArmaConMunicion();
             }
@@ -103,6 +113,7 @@ public class InventarioJugador : MonoBehaviour
     {
         if (armas.Count <= 1)
         {
+            messageText.text = "Sin otras armas disponibles en el inventario.";
             Debug.LogWarning("Sin otras armas disponibles en el inventario.");
             return false;
         }
@@ -123,6 +134,7 @@ public class InventarioJugador : MonoBehaviour
             }
         }
 
+        messageText.text = "¡Todas las armas del inventario están sin munición!";
         Debug.LogWarning("¡Todas las armas del inventario están sin munición!");
         return false;
     }
