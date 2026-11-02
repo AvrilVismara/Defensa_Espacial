@@ -4966,7 +4966,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeteoriteMovement
   building: {fileID: 0}
-  meteorite: {fileID: 243165357697072706}
   speed: 7
   health: 100
 --- !u!54 &899499427601227000
@@ -5009,7 +5008,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 2aa921e181967bf4888bd305c50cf9f4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
