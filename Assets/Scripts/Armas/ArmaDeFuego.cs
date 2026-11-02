@@ -24,10 +24,10 @@ public class ArmaDeFuego : Arma
 
 // PISTOLA ---
 [System.Serializable]
-public class Pistola : ArmaDeFuego
+public class LanzaCohetes : ArmaDeFuego
 {
     // Constructor ---
-    public Pistola(string nombre, int municionMaxima, float cadencia, float danio, bool automatica, float dispersion)
+    public LanzaCohetes(string nombre, int municionMaxima, float cadencia, float danio, bool automatica, float dispersion)
         : base(nombre, municionMaxima, cadencia, danio, automatica, dispersion) { }
 
     public override void PatronDisparo()

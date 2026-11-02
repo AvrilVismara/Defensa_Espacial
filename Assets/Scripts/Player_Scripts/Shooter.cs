@@ -7,6 +7,7 @@ public class Shooter : MonoBehaviour
     [Header("REFERENCIAS")]
     [SerializeField] private Transform puntoDisparo;
     [SerializeField] private GameObject prefabBala;
+    [SerializeField] private GameObject prefabCohete;
     [SerializeField] private InventarioJugador inventario;
     [SerializeField] private Animator animator;
     [SerializeField] private LayerMask capasImpacto = ~0;
@@ -110,6 +111,22 @@ public class Shooter : MonoBehaviour
     {
         if (prefabBala == null || Camera.main == null) return;
 
+        GameObject prefabAInstanciar = null;
+
+        if (arma is Ametralladora)
+        {
+            prefabAInstanciar = prefabBala;
+        }
+        else if (arma is LanzaCohetes)
+        {
+            prefabAInstanciar = prefabCohete;
+        }
+
+        if (prefabAInstanciar == null)
+        {
+            Debug.LogWarning($"El arma {arma.Nombre} no tiene un prefab asignado en el Shooter.");
+            return;
+        }
         Ray rayoCamara = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         Vector3 puntoObjetivo;
 
@@ -121,9 +138,9 @@ public class Shooter : MonoBehaviour
         Vector3 direccionDisparo = (puntoObjetivo - puntoDisparo.position).normalized;
         Quaternion rotacionBala = Quaternion.LookRotation(direccionDisparo);
 
-        GameObject bala = Instantiate(prefabBala, puntoDisparo.position, rotacionBala);
+        GameObject proyectil = Instantiate(prefabAInstanciar, puntoDisparo.position, rotacionBala);
 
-        Bullet componenteBala = bala.GetComponent<Bullet>();
+        Bullet componenteBala = proyectil.GetComponent<Bullet>();
         if (componenteBala != null) componenteBala.Configurar(arma.Danio);
     }
 }
