@@ -16,9 +16,11 @@ MonoBehaviour:
   numeroOleada: 3
   indiceSpawner: 0
   tiempoPreparacion: 15
-  intervaloAparicion: 2
+  intervaloAparicion: 3
   prefabsMeteoritos:
   - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
-  cantidadMeteoritos: 5
+  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
+  - {fileID: 243165357697072706, guid: 4a7217c2e3110b0498caa317cfdd575d, type: 3}
+  cantidadMeteoritos: 3
   armasDesbloqueadas:
   - Laser

@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.AI;
+[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
 public class Movimiento_Personaje : MonoBehaviour
 {
     [Header("Movimiento")]
@@ -12,18 +15,42 @@ public class Movimiento_Personaje : MonoBehaviour
     [Header("Salto")]
     [SerializeField] private float fuerzaDeSalto = 5f;        // Fuerza vertical aplicada para saltar
     [SerializeField] private LayerMask capaDelSuelo;          // Máscara para filtrar qué objetos cuentan como suelo
+    [SerializeField] private LayerMask buildings;
     [SerializeField] private Transform CkeckCapaSuelo;        // Objeto vacío en la base de los pies para el detector
     [SerializeField] private float distanciaSuelo = 0.2f;     // Radio del detector esférico de suelo
+    private NavMeshAgent agent;
+
+    private bool EnSuelo = false;
+    private bool Saltando = false;
+    private float tiempoUltimoSalto = 0f;
 
     [Header("Animaciones")]
     [SerializeField] private Animator animator;              // Referencia al componente Animator
+    [SerializeField] private float duracionTranscionArma = 0.15f; // Suavizado de la transición de armas
+
+    [Header("Nombres de Animaciones de Armas")]
+    [SerializeField] private string nombreAnimacionRifle;
+    [SerializeField] private string nombreAnimacionLanzacohetes;
+    [SerializeField] private float velocidadTransicionPeso = 5f;
+
+    private int indiceCapaUpperbody = 1;
+    private Coroutine Weigthlayer;
+
+    public enum TipoArmaEquipada
+    {
+        Ninguna,
+        Rifle,
+        Lanzacohetes
+    }
+    private TipoArmaEquipada armaActual = TipoArmaEquipada.Ninguna;
+
 
     private Rigidbody rb;                                     // Referencia al componente de físicas
     private Collider miCollider;                              // Referencia al Collider del personaje (CapsuleCollider)
     private PlayerMovement inputDeAcciones;                   // Clase auto-generada del Input System
     private Vector2 inputDeMovimiento;                        // Entrada analógica o teclado (WASD)
-    private bool Corriendo;                                   // Estado de la acción de correr
-    private bool EnSuelo = false;                             // Confirmación de contacto con la superficie
+    private bool Corriendo;                                   // Estado de la acción de correr                             // Confirmación de contacto con la superficie
+
 
     private void Awake()
     {
@@ -31,13 +58,13 @@ public class Movimiento_Personaje : MonoBehaviour
         miCollider = GetComponent<Collider>();
         inputDeAcciones = new PlayerMovement();
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
     }
     private void OnEnable()
     {
@@ -63,6 +90,8 @@ public class Movimiento_Personaje : MonoBehaviour
         inputDeAcciones.Player.Jump.performed -= OnJumpPerformed;
 
         inputDeAcciones.Player.Disable();
+
+
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context) => inputDeMovimiento = context.ReadValue<Vector2>();
@@ -72,13 +101,20 @@ public class Movimiento_Personaje : MonoBehaviour
 
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        if (EnSuelo)
+        if (EnSuelo && !Saltando)
         {
+            Saltando = true;
+            tiempoUltimoSalto = Time.time; // Guardamos el momento del salto
+
+            agent.enabled = false;
+
+            // Limpiar inercia vertical previa para que el salto sea siempre idéntico
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * fuerzaDeSalto, ForceMode.Impulse);
+
             if (animator != null) animator.SetTrigger("Salto");
         }
     }
-
 
 
     private void OnDrawGizmosSelected()
@@ -93,11 +129,30 @@ public class Movimiento_Personaje : MonoBehaviour
 
     void Update()
     {
-        // 1. Detección de suelo
         if (CkeckCapaSuelo != null)
         {
-            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo);
+            // Combinamos ambas capas
+            EnSuelo = Physics.CheckSphere(CkeckCapaSuelo.position, distanciaSuelo, capaDelSuelo | buildings);
+
+            if (EnSuelo && Saltando && Time.time > tiempoUltimoSalto + 0.2f)
+            {
+                Saltando = false;
+                agent.enabled = true;
+            }
         }
+
+        // Control de gravedad para no resbalar en pendientes
+        if (EnSuelo && !Saltando)
+        {
+            // Si no hay input, quitamos la gravedad para anclarlo. Si hay input, la activamos para movernos fluido.
+            rb.useGravity = (inputDeMovimiento != Vector2.zero);
+        }
+        else
+        {
+            // Si estamos en el aire (saltando o cayendo), siempre usamos gravedad
+            rb.useGravity = true;
+        }
+
 
         // 2. Control de parámetros del Animator
         if (animator != null)
@@ -125,7 +180,6 @@ public class Movimiento_Personaje : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
         cameraForward.y = 0f;
@@ -137,6 +191,23 @@ public class Movimiento_Personaje : MonoBehaviour
         Vector3 direction = (cameraForward * inputDeMovimiento.y + cameraRight * inputDeMovimiento.x).normalized;
         Vector3 targetVelocity = direction * currentSpeed;
 
-        rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+        if (EnSuelo && !Saltando && Physics.Raycast(CkeckCapaSuelo.position + Vector3.up * 0.1f, Vector3.down, out RaycastHit hit, 0.5f, capaDelSuelo | buildings))
+        {
+            Vector3 direccionInclinada = Vector3.ProjectOnPlane(targetVelocity, hit.normal).normalized;
+
+            if (inputDeMovimiento.magnitude > 0)
+            {
+                rb.linearVelocity = direccionInclinada * currentSpeed;
+            }
+            else
+            {
+                rb.linearVelocity = Vector3.zero;
+            }
+        }
+        else
+        {
+            // NUEVO: Movimiento cuando el personaje está saltando o cayendo
+            rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+        }
     }
 }
