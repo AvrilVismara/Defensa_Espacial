@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1936539ade6aed4eadccf00866e725c, type: 3}
+  m_Name: Oleada2
+  m_EditorClassIdentifier: Assembly-CSharp::WaveConfigSO
+  nombreOleada: Oleada 2
+  numeroOleada: 2
+  indiceSpawner: 0
+  tiempoPreparacion: 10
+  intervaloAparicion: 1.5
+  prefabsMeteoritos:
+  - {fileID: 243165357697072706, guid: 6863a369208f37348be6997dca8a2d87, type: 3}
+  cantidadMeteoritos: 5
+  armasDesbloqueadas:
+  - LanzaCohetes
