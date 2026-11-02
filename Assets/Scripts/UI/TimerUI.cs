@@ -49,8 +49,8 @@ public class TimerUI : MonoBehaviour
 
             timerText.text = string.Format("{0:00}:{1:00}", minutos, segundos);
 
-            // Evento al llegar a 480 segundos
-            if (tiempoRestante <= 480f && !audioFinalReproducido)
+            // Evento al llegar a 540 segundos
+            if (tiempoRestante <= 540f && !audioFinalReproducido)
             {
                 audioFinalReproducido = true;
 
