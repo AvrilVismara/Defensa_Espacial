@@ -1,37 +1,33 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class WeaponPoint : MonoBehaviour
 {
     [Header("CONFIGURACIÓN DEL PUNTO")]
-    [SerializeField] private float tiempoReaparicion = 8f; //Tiempo en segundos que tarda en aparecer el arma después de ser recogida
-    [SerializeField] private float tiempoInicial = 2f; //Tiempo inicial de espera antes de la primera aparición
+    [SerializeField] private float tiempoReaparicion = 8f;
+    [SerializeField] private float tiempoInicial = 2f;
 
-    [Header("CONFIGURACIÓN DE ARMAS (SPAWN ALEATORIO)")]
-    [SerializeField] private List<ScriptableObject> configuracionesPosibles = new List<ScriptableObject>(); // lista de config de armas que pueden aparecer en este punto
+    [Header("ARMA FIJA DEL PUNTO")]
+    [Tooltip("La única configuración de arma que puede aparecer en este punto")]
+    [SerializeField] private ScriptableObject configuracionArma;
 
     [Header("REFERENCIA VISUAL")]
     [SerializeField] private GameObject prefabArmaVisual;
 
-    private GameObject armaVisualActual;      // El arma que está en el mapa
-    private ComponenteArma componenteArma;    // Componente del arma visual
-    private Collider colliderPunto;           // Collider del punto (Trigger)
-    private bool armaDisponible = false;      // Si hay arma para recoger
-    private Coroutine corrutinaReaparicion;   // Controla el ciclo de aparición
-    private ScriptableObject configuracionActual; // Configuración del arma actual
-
+    private GameObject armaVisualActual;
+    private ComponenteArma componenteArma;
+    private Collider colliderPunto;
+    private bool armaDisponible = false;
+    private Coroutine corrutinaReaparicion;
 
     void Start()
     {
-        // Verifica que haya al menos una configuración --
-        if (configuracionesPosibles == null || configuracionesPosibles.Count == 0)
+        if (configuracionArma == null)
         {
-            Debug.LogError($"{gameObject.name}: No hay configuraciones de armas asignadas.");
+            Debug.LogError($"{gameObject.name}: No hay configuración de arma asignada.");
             return;
         }
 
-        // Configurar el collider del punto como Trigger
         colliderPunto = GetComponent<Collider>();
         if (colliderPunto == null)
         {
@@ -45,14 +41,12 @@ public class WeaponPoint : MonoBehaviour
             colliderPunto.isTrigger = true;
         }
 
-        // Verificar que haya un prefab visual
         if (prefabArmaVisual == null)
         {
             Debug.LogError($"{gameObject.name}: No se asignó un prefab visual.");
             return;
         }
 
-        // Iniciar el ciclo de aparición
         IniciarCiclo();
     }
 
@@ -67,23 +61,29 @@ public class WeaponPoint : MonoBehaviour
 
     private IEnumerator CicloAparicion()
     {
-        // Esperar el tiempo inicial
         yield return new WaitForSeconds(tiempoInicial);
 
         while (true)
         {
-            // 1. SELECCIONAR ARMA ALEATORIA
-            configuracionActual = SeleccionarArmaAleatoria();
+            // 1. Verificar si el arma está desbloqueada globalmente
+            string nombreArma = ObtenerNombreArma(configuracionArma);
 
-            // 2. CREAR EL ARMA VISUAL
+            if (!WaveManager.Instancia.EstaDesbloqueada(nombreArma))
+            {
+                // Si no está desbloqueada, esperar y reintentar
+                yield return new WaitForSeconds(2f);
+                continue;
+            }
+
+            // 2. Crear el arma visual
             CrearArmaVisual();
 
-            // 3. MOSTRARLA
+            // 3. Mostrarla
             if (armaVisualActual != null)
             {
                 armaVisualActual.SetActive(true);
                 armaDisponible = true;
-                Debug.Log($"{gameObject.name}: {configuracionActual.name} disponible");
+                Debug.Log($"{gameObject.name}: {configuracionArma.name} disponible");
             }
             else
             {
@@ -91,7 +91,7 @@ public class WeaponPoint : MonoBehaviour
                 yield break;
             }
 
-            // 4. ESPERAR HASTA QUE EL JUGADOR LA RECOJA (o pase el tiempo máximo)
+            // 4. Esperar hasta que el jugador la recoja (o pase el tiempo máximo)
             float tiempoMaximoVisible = 60f;
             float tiempoTranscurrido = 0f;
 
@@ -101,28 +101,27 @@ public class WeaponPoint : MonoBehaviour
                 tiempoTranscurrido += 0.5f;
             }
 
-            // 5. OCULTARLA (si sigue disponible)
+            // 5. Ocultarla (si sigue disponible)
             if (armaDisponible)
             {
                 OcultarArmaVisual();
-                Debug.Log($"{gameObject.name}: Arma desaparecida por tiempo de espera.");
             }
 
-            // 6. ESPERAR PARA REAPARECER
+            // 6. Esperar para reaparecer
             yield return new WaitForSeconds(tiempoReaparicion);
         }
     }
 
-    private ScriptableObject SeleccionarArmaAleatoria()
+    private string ObtenerNombreArma(ScriptableObject config)
     {
-        // Elegir un arma aleatoria de la lista
-        int indice = Random.Range(0, configuracionesPosibles.Count);
-        return configuracionesPosibles[indice];
+        if (config is ConfigAmetralladoraSO am) return am.nombreArma;
+        if (config is ConfigLanzaCohetesSO lc) return lc.nombreArma;
+        if (config is ConfigLaserSO laser) return laser.nombreArma;
+        return null;
     }
 
-    private void CrearArmaVisual()
+    public void CrearArmaVisual()
     {
-        // Si ya hay un arma visual, destruirla
         if (armaVisualActual != null)
         {
             Destroy(armaVisualActual);
@@ -130,10 +129,8 @@ public class WeaponPoint : MonoBehaviour
             componenteArma = null;
         }
 
-        // Instanciar el prefab en la posición del punto
         armaVisualActual = Instantiate(prefabArmaVisual, transform.position, Quaternion.identity, transform);
 
-        // Obtener el ComponenteArma
         componenteArma = armaVisualActual.GetComponent<ComponenteArma>();
         if (componenteArma == null)
         {
@@ -143,14 +140,11 @@ public class WeaponPoint : MonoBehaviour
             return;
         }
 
-        // Asignar la configuración seleccionada al ComponenteArma
-        componenteArma.AsignarConfiguracion(configuracionActual);
-
-        // Ocultarla inicialmente
+        componenteArma.AsignarConfiguracion(configuracionArma);
         armaVisualActual.SetActive(false);
     }
 
-    private void OcultarArmaVisual()
+    public void OcultarArmaVisual()
     {
         if (armaVisualActual != null)
         {
@@ -159,51 +153,44 @@ public class WeaponPoint : MonoBehaviour
         }
     }
 
-// Recogida del arma
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        // Solo si el arma está disponible y el que entra es el jugador
         if (!armaDisponible) return;
         if (!other.CompareTag("Player")) return;
 
-        // Obtener el inventario del jugador
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("asdwqdwqdsad");
+        }
+
         InventarioJugador inventario = other.GetComponent<InventarioJugador>();
         if (inventario == null) return;
 
-        // Obtener el arma del componente
         Arma arma = componenteArma?.Arma;
         if (arma == null) return;
 
-        // El jugador ya tiene este arma?
         if (inventario.TieneArma(arma.Nombre))
         {
-            // Obtener el arma que tiene el jugador
             Arma armaJugador = inventario.ObtenerArmaPorNombre(arma.Nombre);
 
-            // La munición está completa?
             if (armaJugador.MunicionActual >= armaJugador.MunicionMaxima)
             {
-                // con nunición completa no puede recoger
                 Debug.Log($"{arma.Nombre}: Ya tienes el arma con munición completa. No puedes recoger más.");
-                return; // no levanta nada, la municion continua en el suelo
+                return;
             }
             else
             {
-                // Tiene el arma pero con poca municion
                 inventario.RecargarArma(arma.Nombre);
-                Debug.Log($"{arma.Nombre}: Munición recargada.");
-
-                // El arma desaparece porque ya recargó
+                inventario.EquiparArma(arma.Nombre);
+                Debug.Log($"{arma.Nombre}: Munición recargada y arma equipada");
                 OcultarArmaVisual();
             }
         }
         else
         {
-            //No tiene el arma
             inventario.AgregarArma(arma);
-            Debug.Log($"{arma.Nombre}: ¡Arma nueva añadida al inventario!");
-
-            // El arma desaparece porque fue recogida
+            inventario.EquiparArma(arma.Nombre);
+            Debug.Log($"{arma.Nombre}: Arma nueva añadida al inventario!");
             OcultarArmaVisual();
         }
     }

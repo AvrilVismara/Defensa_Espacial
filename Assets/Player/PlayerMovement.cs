@@ -136,6 +136,42 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ToggleInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""79cc0763-ba49-49ca-a002-0237951f39d3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquiparArma1"",
+                    ""type"": ""Value"",
+                    ""id"": ""3b67bc7e-4cec-42ed-afc4-1f41f9913304"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""EquiparArma2"",
+                    ""type"": ""Value"",
+                    ""id"": ""3134e789-6d0b-4171-9f29-c23f40491c4c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""EquiparArma3"",
+                    ""type"": ""Value"",
+                    ""id"": ""0beca281-e620-4241-b42f-7b1ac4a71c1b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -237,32 +273,48 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""SaltoObst"",
-            ""id"": ""7f3556c4-17af-4b8f-a804-809e66a96689"",
-            ""actions"": [
-                {
-                    ""name"": ""JumpObs"",
-                    ""type"": ""Button"",
-                    ""id"": ""68cae9f2-f1c3-47e2-9432-909e142b7107"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""e2ec9a5d-95f5-4d6a-af84-371f92b9d17f"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""ca29f6aa-0806-427a-8a2d-b5b77b79830a"",
+                    ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""JumpObs"",
+                    ""action"": ""ToggleInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6afa1db-ac71-4f89-ab4c-0a8b6fbb652b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquiparArma1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14b57aba-e0b6-4e2b-bd2c-85498cebeef6"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquiparArma2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9b9f954-58c7-4f8e-b8cd-a0fa65f51947"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquiparArma3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -278,15 +330,15 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
-        // SaltoObst
-        m_SaltoObst = asset.FindActionMap("SaltoObst", throwIfNotFound: true);
-        m_SaltoObst_JumpObs = m_SaltoObst.FindAction("JumpObs", throwIfNotFound: true);
+        m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
+        m_Player_EquiparArma1 = m_Player.FindAction("EquiparArma1", throwIfNotFound: true);
+        m_Player_EquiparArma2 = m_Player.FindAction("EquiparArma2", throwIfNotFound: true);
+        m_Player_EquiparArma3 = m_Player.FindAction("EquiparArma3", throwIfNotFound: true);
     }
 
     ~@PlayerMovement()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerMovement.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_SaltoObst.enabled, "This will cause a leak and performance issues, PlayerMovement.SaltoObst.Disable() has not been called.");
     }
 
     /// <summary>
@@ -367,6 +419,10 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_EquiparArma1;
+    private readonly InputAction m_Player_EquiparArma2;
+    private readonly InputAction m_Player_EquiparArma3;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -398,6 +454,22 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Look".
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/ToggleInventory".
+        /// </summary>
+        public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/EquiparArma1".
+        /// </summary>
+        public InputAction @EquiparArma1 => m_Wrapper.m_Player_EquiparArma1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/EquiparArma2".
+        /// </summary>
+        public InputAction @EquiparArma2 => m_Wrapper.m_Player_EquiparArma2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/EquiparArma3".
+        /// </summary>
+        public InputAction @EquiparArma3 => m_Wrapper.m_Player_EquiparArma3;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -439,6 +511,18 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @ToggleInventory.started += instance.OnToggleInventory;
+            @ToggleInventory.performed += instance.OnToggleInventory;
+            @ToggleInventory.canceled += instance.OnToggleInventory;
+            @EquiparArma1.started += instance.OnEquiparArma1;
+            @EquiparArma1.performed += instance.OnEquiparArma1;
+            @EquiparArma1.canceled += instance.OnEquiparArma1;
+            @EquiparArma2.started += instance.OnEquiparArma2;
+            @EquiparArma2.performed += instance.OnEquiparArma2;
+            @EquiparArma2.canceled += instance.OnEquiparArma2;
+            @EquiparArma3.started += instance.OnEquiparArma3;
+            @EquiparArma3.performed += instance.OnEquiparArma3;
+            @EquiparArma3.canceled += instance.OnEquiparArma3;
         }
 
         /// <summary>
@@ -465,6 +549,18 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @ToggleInventory.started -= instance.OnToggleInventory;
+            @ToggleInventory.performed -= instance.OnToggleInventory;
+            @ToggleInventory.canceled -= instance.OnToggleInventory;
+            @EquiparArma1.started -= instance.OnEquiparArma1;
+            @EquiparArma1.performed -= instance.OnEquiparArma1;
+            @EquiparArma1.canceled -= instance.OnEquiparArma1;
+            @EquiparArma2.started -= instance.OnEquiparArma2;
+            @EquiparArma2.performed -= instance.OnEquiparArma2;
+            @EquiparArma2.canceled -= instance.OnEquiparArma2;
+            @EquiparArma3.started -= instance.OnEquiparArma3;
+            @EquiparArma3.performed -= instance.OnEquiparArma3;
+            @EquiparArma3.canceled -= instance.OnEquiparArma3;
         }
 
         /// <summary>
@@ -498,102 +594,6 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
-
-    // SaltoObst
-    private readonly InputActionMap m_SaltoObst;
-    private List<ISaltoObstActions> m_SaltoObstActionsCallbackInterfaces = new List<ISaltoObstActions>();
-    private readonly InputAction m_SaltoObst_JumpObs;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "SaltoObst".
-    /// </summary>
-    public struct SaltoObstActions
-    {
-        private @PlayerMovement m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public SaltoObstActions(@PlayerMovement wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "SaltoObst/JumpObs".
-        /// </summary>
-        public InputAction @JumpObs => m_Wrapper.m_SaltoObst_JumpObs;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_SaltoObst; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="SaltoObstActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(SaltoObstActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="SaltoObstActions" />
-        public void AddCallbacks(ISaltoObstActions instance)
-        {
-            if (instance == null || m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Add(instance);
-            @JumpObs.started += instance.OnJumpObs;
-            @JumpObs.performed += instance.OnJumpObs;
-            @JumpObs.canceled += instance.OnJumpObs;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="SaltoObstActions" />
-        private void UnregisterCallbacks(ISaltoObstActions instance)
-        {
-            @JumpObs.started -= instance.OnJumpObs;
-            @JumpObs.performed -= instance.OnJumpObs;
-            @JumpObs.canceled -= instance.OnJumpObs;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />.
-        /// </summary>
-        /// <seealso cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />
-        public void RemoveCallbacks(ISaltoObstActions instance)
-        {
-            if (m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="SaltoObstActions.AddCallbacks(ISaltoObstActions)" />
-        /// <seealso cref="SaltoObstActions.RemoveCallbacks(ISaltoObstActions)" />
-        /// <seealso cref="SaltoObstActions.UnregisterCallbacks(ISaltoObstActions)" />
-        public void SetCallbacks(ISaltoObstActions instance)
-        {
-            foreach (var item in m_Wrapper.m_SaltoObstActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_SaltoObstActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="SaltoObstActions" /> instance referencing this action map.
-    /// </summary>
-    public SaltoObstActions @SaltoObst => new SaltoObstActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -636,20 +636,33 @@ public partial class @PlayerMovement: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "SaltoObst" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="SaltoObstActions.AddCallbacks(ISaltoObstActions)" />
-    /// <seealso cref="SaltoObstActions.RemoveCallbacks(ISaltoObstActions)" />
-    public interface ISaltoObstActions
-    {
         /// <summary>
-        /// Method invoked when associated input action "JumpObs" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ToggleInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnJumpObs(InputAction.CallbackContext context);
+        void OnToggleInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquiparArma1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquiparArma1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquiparArma2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquiparArma2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquiparArma3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquiparArma3(InputAction.CallbackContext context);
     }
 }
