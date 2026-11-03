@@ -5017,9 +5017,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5107,3 +5107,7 @@ MonoBehaviour:
   AudioSource: {fileID: 4478269439386904050}
   meteoriteTrail: {fileID: 8300000, guid: 2aa921e181967bf4888bd305c50cf9f4, type: 3}
   meteoriteExplotion: {fileID: 8300000, guid: 25de0f257979d4f48b9fb3892249a760, type: 3}
+  minPitch: 0.9
+  maxPitch: 1.1
+  minVolume: 0.9
+  maxVolume: 1

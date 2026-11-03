@@ -26158,16 +26158,16 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -79291,9 +79291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd745905052b0154080f2c8408e55ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  locucionInicio: {fileID: -431098717213735402, guid: e303bb57164e24241a43f4318cca3a86, type: 2}
   normal: {fileID: 24500006, guid: e303bb57164e24241a43f4318cca3a86, type: 2}
   desafioFinal: {fileID: 6143879687560425452, guid: e303bb57164e24241a43f4318cca3a86, type: 2}
-  transicion: 1
+  transicion: 2
 --- !u!4 &2124909492
 Transform:
   m_ObjectHideFlags: 0

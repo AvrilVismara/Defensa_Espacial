@@ -7,9 +7,16 @@ using System.Collections;
 public class AudioMix : MonoBehaviour
 {
     [Header("Snapshots")]
+    public AudioMixerSnapshot locucionInicio;
     public AudioMixerSnapshot normal;
     public AudioMixerSnapshot desafioFinal;
-    [Min(0f)] public float transicion = 1f;
+    [Min(0f)] public float transicion = 2f;
+
+    public void LocucionInicio()
+    {
+        if (locucionInicio != null)
+            locucionInicio.TransitionTo(transicion);
+    }
 
     public void Normal() 
     
@@ -26,23 +33,34 @@ public class AudioMix : MonoBehaviour
 
             desafioFinal.TransitionTo(transicion); 
     }
-
-  
     private void Start()
     {
-        // Comienza el snapshot normal
+        // Inicia snapshot locucionInicio
+       LocucionInicio();
+
+        // Corrutina para controlar tiempo
+        StartCoroutine(SecuenciaDeSnapshots());
+    }
+    private IEnumerator SecuenciaDeSnapshots()
+    {
+        // Tiempo de espera
+        yield return new WaitForSecondsRealtime(30f);
+
+
+        // Cambia a snapshot normal
+        Debug.Log("Ejecutando Normal()");
         Normal();
 
-        // Comienza corrutina para esperar (120 segundos)
-        StartCoroutine(EsperarYCambiarSnapshot());
-    }
+        // Tiempo espera
+        Debug.Log(" Esperando 30s para cambiar a Desafio Final...");
+        yield return new WaitForSecondsRealtime(30f);
 
-    private IEnumerator EsperarYCambiarSnapshot()
-    {
-        // Espera los 120 segundos
-        yield return new WaitForSeconds(120f);
-
-        // Se activa el snapshot de desafío final 
+        // Inicia snapshot desafio final
+        Debug.Log("Ejecutando DesafioFinal()");
         DesafioFinal();
+
+        yield return new WaitForSecondsRealtime(18f);
+
+        Normal();
     }
 }
