@@ -9,14 +9,10 @@ public class TimerUI : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSourceVoice;
-
     public AudioSource audioSourceMusic;
 
-
     public AudioClip finalChallengeAudio;
-
     public AudioClip musicFinalChallenge;
-
 
     [Header("Timer")]
     public float tiempoRestante = 600f; // 10 minutos
@@ -28,17 +24,22 @@ public class TimerUI : MonoBehaviour
     {
         if (audioSourceVoice == null)
         {
-            audioSourceVoice = FindFirstObjectByType<AudioSource>();
+            Debug.LogWarning("AudioSourceVoice no asignado.");
         }
 
-        if (audioSourceVoice == null)
+        if (audioSourceMusic == null)
         {
-            Debug.LogError("No se encontró ningún AudioSource en la escena.");
+            Debug.LogWarning("AudioSourceMusic no asignado.");
         }
 
         if (finalChallengeAudio == null)
         {
-            Debug.LogError("No se asignó Final Challenge Audio en el Inspector.");
+            Debug.LogError("No se asignó Final Challenge Audio.");
+        }
+
+        if (musicFinalChallenge == null)
+        {
+            Debug.LogWarning("No se asignó Music Final Challenge.");
         }
     }
 
@@ -56,8 +57,8 @@ public class TimerUI : MonoBehaviour
 
             timerText.text = string.Format("{0:00}:{1:00}", minutos, segundos);
 
-            // Evento al llegar a 540 segundos
-            if (tiempoRestante <= 540f && !audioFinalReproducido)
+            // Se activa cuando quedan 8 minutos (480 segundos)
+            if (tiempoRestante <= 480f && !audioFinalReproducido)
             {
                 audioFinalReproducido = true;
 
@@ -65,27 +66,38 @@ public class TimerUI : MonoBehaviour
 
                 Debug.Log("DESAFÍO FINAL ACTIVADO");
 
+                // Reproducir locución
                 if (audioSourceVoice != null && finalChallengeAudio != null)
                 {
-                    audioSourceVoice.clip = finalChallengeAudio;
-                    audioSourceVoice.clip = musicFinalChallenge;
-                    audioSourceVoice.Play();
-                    audioSourceMusic.Play();
-
-                    Debug.Log("Reproduciendo audio final");
+                    audioSourceVoice.PlayOneShot(finalChallengeAudio);
+                    Debug.Log("Locución reproducida");
                 }
                 else
                 {
-                    Debug.LogError("Falta AudioSource o AudioClip");
+                    Debug.LogError("Falta AudioSourceVoice o FinalChallengeAudio");
+                }
+
+                // Reproducir música
+                if (audioSourceMusic != null && musicFinalChallenge != null)
+                {
+                    audioSourceMusic.clip = musicFinalChallenge;
+                    audioSourceMusic.Play();
+
+                    Debug.Log("Música final reproducida");
+                }
+                else
+                {
+                    Debug.LogError("Falta AudioSourceMusic o MusicFinalChallenge");
                 }
             }
         }
         else
         {
-            tiempoRestante = 0;
+            tiempoRestante = 0f;
             timerText.text = "00:00";
             contadorActivo = false;
 
+            messageText.text = "¡Tiempo terminado!";
             Debug.Log("¡Tiempo terminado!");
         }
     }
