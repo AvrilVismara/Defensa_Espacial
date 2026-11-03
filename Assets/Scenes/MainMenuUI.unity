@@ -1147,7 +1147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: -117}
+  m_AnchoredPosition: {x: 16, y: -110}
   m_SizeDelta: {x: 634.612, y: 114.039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630063375
@@ -1179,7 +1179,9 @@ MonoBehaviour:
     D: Derecha
 
     Mouse:
-    Vista y disparo'
+    Vista y disparo
+
+    Escape: Pausa'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1ec7f64addfea346a014139570e5224, type: 2}
   m_sharedMaterial: {fileID: 7229980952857144381, guid: d1ec7f64addfea346a014139570e5224, type: 2}
