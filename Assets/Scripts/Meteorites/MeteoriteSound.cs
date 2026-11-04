@@ -7,7 +7,7 @@ public class MeteoriteSound : MonoBehaviour
     public AudioClip meteoriteTrail;
     public AudioClip meteoriteExplotion;
 
-    [Header("Variación de Tono y Volumen")]
+    [Header("Variación de Pitch y Volumen")]
     [Range(0.8f, 1.2f)] public float minPitch = 0.9f;
     [Range(0.8f, 1.2f)] public float maxPitch = 1.1f;
 
