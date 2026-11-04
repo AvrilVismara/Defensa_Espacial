@@ -13237,7 +13237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.265
+      value: 2.271
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20105,7 +20105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.667
+      value: 1.658
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21101,7 +21101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.001
+      value: 1.982
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21448,9 +21448,9 @@ RectTransform:
   m_Children:
   - {fileID: 878072925}
   - {fileID: 562383475}
-  - {fileID: 809205150}
   - {fileID: 533249515}
   - {fileID: 608547129}
+  - {fileID: 809205150}
   - {fileID: 137913183}
   - {fileID: 1247616008}
   - {fileID: 1982517019}
@@ -24809,7 +24809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4058
+      value: 2.398
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.z
@@ -56448,7 +56448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &1720895370
 ParticleSystemRenderer:
   serializedVersion: 7
@@ -61828,7 +61828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3155
+      value: 2.318
       objectReference: {fileID: 0}
     - target: {fileID: 648342009390425029, guid: 7c08da9783fd4ae43b7f44cc1aa92c25, type: 3}
       propertyPath: m_LocalPosition.z

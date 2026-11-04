@@ -1181,7 +1181,7 @@ MonoBehaviour:
     Mouse:
     Vista y disparo
 
-    Escape: Pausa'
+    Escape: Pausa / Armas: 1-2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1ec7f64addfea346a014139570e5224, type: 2}
   m_sharedMaterial: {fileID: 7229980952857144381, guid: d1ec7f64addfea346a014139570e5224, type: 2}
