@@ -52,7 +52,7 @@ public class AudioMix : MonoBehaviour
         Normal();
 
         // Tiempo espera
-        Debug.Log(" Esperando 90s para cambiar a Desafio Final...");
+        Debug.Log(" Esperando 91s para cambiar a Desafio Final...");
         yield return new WaitForSecondsRealtime(91f);
 
         // Inicia snapshot desafio final
